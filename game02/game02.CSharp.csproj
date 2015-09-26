@@ -57,6 +57,12 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -85,10 +91,24 @@
     <Compile Include="Assets\Character\Allosaurus\Standard Assets\Image Effects (Pro Only)\VortexEffect.cs" />
     <Compile Include="Assets\Character\Cha_Data\Script\ScreenShot.cs" />
     <Compile Include="Assets\Character\Minotaur\Script\RotateObject.cs" />
-    <Compile Include="Assets\Tazo_fx\Script\ActiveSelf.cs" />
-    <Compile Include="Assets\Tazo_fx\Script\AnimateTiledTextureOnTrail.cs" />
-    <Compile Include="Assets\Tazo_fx\Script\BillBoard.cs" />
-    <Compile Include="Assets\Tazo_fx\Script\DestroySelf.cs" />
+    <Compile Include="Assets\Effect\Tazo_fx\Script\ActiveSelf.cs" />
+    <Compile Include="Assets\Effect\Tazo_fx\Script\AnimateTiledTextureOnTrail.cs" />
+    <Compile Include="Assets\Effect\Tazo_fx\Script\BillBoard.cs" />
+    <Compile Include="Assets\Effect\Tazo_fx\Script\DestroySelf.cs" />
+    <Compile Include="Assets\Script\Actor\EnemyAI.cs" />
+    <Compile Include="Assets\Script\Actor\Player.cs" />
+    <Compile Include="Assets\Script\GameManager\GameManager.cs" />
+    <Compile Include="Assets\Script\Map\MapContoroller.cs" />
+    <Compile Include="Assets\Script\Map\Tile.cs" />
+    <Compile Include="Assets\Script\Sceane\GameMain.cs" />
+    <Compile Include="Assets\Script\Sceane\ProjectStatus.cs" />
+    <Compile Include="Assets\Script\Unit\Unit.cs" />
+    <Compile Include="Assets\Script\Unit\UnitController.cs" />
+    <Compile Include="Assets\Script\Unit\UnitMenue.cs" />
+    <Compile Include="Assets\Script\Utility\BGM.cs" />
+    <Compile Include="Assets\Script\Utility\GameUI.cs" />
+    <Compile Include="Assets\Script\Utility\GraphicEffect.cs" />
+    <Compile Include="Assets\Script\Utility\SoundEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Character\Allosaurus\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\BlendModesOverlay.shader" />
