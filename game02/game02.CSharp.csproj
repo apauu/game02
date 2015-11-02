@@ -97,6 +97,7 @@
     <Compile Include="Assets\Script\Sceane\GameMain.cs" />
     <Compile Include="Assets\Script\Sceane\ProjectStatus.cs" />
     <Compile Include="Assets\Script\Unit\Unit.cs" />
+    <Compile Include="Assets\Script\Unit\UnitConst\ExperienceConst.cs" />
     <Compile Include="Assets\Script\Unit\UnitController.cs" />
     <Compile Include="Assets\Script\Unit\UnitMenue.cs" />
     <Compile Include="Assets\Script\Utility\BGM.cs" />
