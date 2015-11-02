@@ -1,15 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyAI : MonoBehaviour {
+public class EnemyAI : ActorAB {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public void Update()
+    {
+
+    }
+
+    void init()
+    {
+
+    }
+
+    void TurnStart()
+    {
+
+    }
+
+    void TurnEnd()
+    {
+
+    }
 }
