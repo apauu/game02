@@ -1,0 +1,40 @@
+Mono path[0] = 'D:/rep/game02/game02/test_Data/Managed'
+Mono path[1] = 'D:/rep/game02/game02/test_Data/Mono'
+Mono config path = 'D:/rep/game02/game02/test_Data/Mono/etc'
+PlayerConnection initialized from D:/rep/game02/game02/test_Data (debug = 0)
+PlayerConnection initialized network socket : 0.0.0.0 55430
+Multi-casting "[IP] 192.168.1.6 [Port] 55430 [Flags] 3 [Guid] 880623082 [EditorId] 1243956402 [Version] 1048832 [Id] WindowsPlayer(dynabookT75) [Debug] 1" to [225.0.0.222:54997]...
+Waiting for connection from host on [192.168.1.6:55430]...
+PlayerConnection accepted from [192.168.1.6] handle:0x1fc
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,defer=y,address=0.0.0.0:56082
+PlayerConnection already initialized - listening to [192.168.1.6:55430]
+Initialize engine version: 5.2.2f1 (3757309da7e7)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: Intel(R) HD Graphics 5500 (ID=0x1616)
+    Vendor:   Intel
+    VRAM:     1919 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: D:\rep\game02\game02\test_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\rep\game02\game02\test_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\rep\game02\game02\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\rep\game02\game02\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\rep\game02\game02\test_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading D:\rep\game02\game02\test_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+Platform assembly: D:\rep\game02\game02\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading D:\rep\game02\game02\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: D:\rep\game02\game02\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading D:\rep\game02\game02\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: D:\rep\game02\game02\test_Data\Managed\System.Core.dll (this message is harmless)
+- Completed reload, in  0.062 seconds
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+Platform assembly: D:\rep\game02\game02\test_Data\Managed\System.dll (this message is harmless)
+Platform assembly: D:\rep\game02\game02\test_Data\Managed\UnityScript.Lang.dll (this message is harmless)
+Platform assembly: D:\rep\game02\game02\test_Data\Managed\Boo.Lang.dll (this message is harmless)
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 150 -> priority: 1 
+Waiting for finish

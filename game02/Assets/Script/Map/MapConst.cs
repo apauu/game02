@@ -24,6 +24,8 @@ public static class MapConst {
     public const int Wall = 900;
     public const int Empty = 910;
 
+    //y座標基準値（海抜0地点）
+    public const float BaseY = 0;
 
     //地形別タイルクラス初期値
     public static readonly Tile PlainsTemplate = new Tile(
