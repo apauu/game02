@@ -1,11 +1,11 @@
 ﻿
-public abstract class ActorAB
+public abstract class AActor : IActor
 {
     public int cost { get; set; }
     public int ally { get; set; }
 
 
-    void useCost(int value)
+    public void useCost(int value)
     {
 
     }

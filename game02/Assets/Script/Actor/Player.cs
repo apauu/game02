@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : ActorAB
+public class Player : AActor, IActor
 {
 
     public void Update()

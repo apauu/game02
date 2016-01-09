@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour {
     //0:プレイヤー　1:敵
     int currentPlayerNo;
     int turnCnt;
-    List<ActorAB> playerList = new List<ActorAB>();
+    List<IActor> playerList = new List<IActor>();
 
 
     // Singlleton用プロパティ　インスタンスが存在するか？
@@ -57,8 +57,8 @@ public class GameManager : MonoBehaviour {
         //初回ターン設定
         currentPlayerNo = 0;
         turnCnt = 1;
-        playerList.Add(player); //0番目がプレイヤー
-        playerList.Add(enemy);　//1番目がエネミー
+        //playerList.Add(player); //0番目がプレイヤー
+        //playerList.Add(enemy);　//1番目がエネミー
 
         //UI関係を生成する
         //GenerateUIObj();
@@ -110,39 +110,39 @@ public class GameManager : MonoBehaviour {
         }
 
         //動かせるユニットがいなければターン権限を次のプレイヤーに進める
-        if (!CanMoveUnit(playerList[currentPlayerNo]))
-        {
-            currentPlayerNo++;
-            if (currentPlayerNo > playerList.Count)
-            {
-                currentPlayerNo = 0;
-                //ターン数をカウントアップ
-                turnCnt++;
-            }
-        }
+        //if (!CanMoveUnit(playerList[currentPlayerNo]))
+        //{
+        //    currentPlayerNo++;
+        //    if (currentPlayerNo > playerList.Count)
+        //    {
+        //        currentPlayerNo = 0;
+        //        //ターン数をカウントアップ
+        //        turnCnt++;
+        //    }
+        //}
     }
 
     //プレイヤーの開始時行動
-    bool StartPlayer(ActorAB actor)
+    bool StartPlayer(Player actor)
     {
         return false;
     }
 
     //プレイヤーの行動
-    void UpdatePlayer(ActorAB actor)
+    void UpdatePlayer(Player actor)
     {
     }
 
     //敵プレイヤーの行動
-    void UpdateEnemy(ActorAB actor)
+    void UpdateEnemy(EnemyAI actor)
     {
     }
 
     //現在のプレイヤーのユニットで未行動のものがいるか確認
-    bool CanMoveUnit(ActorAB actor)
-    {
-        return false;
-    }
+    //bool CanMoveUnit()
+    //{
+    //    return false;
+    //}
 
     // 勝利条件に関わる物を監視し、勝利条件を満たした場合ゲームを終了する
     public void ObserveWinLose()

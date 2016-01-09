@@ -89,10 +89,10 @@
     <Compile Include="Assets\Effect\Tazo_fx\Script\AnimateTiledTextureOnTrail.cs" />
     <Compile Include="Assets\Effect\Tazo_fx\Script\BillBoard.cs" />
     <Compile Include="Assets\Effect\Tazo_fx\Script\DestroySelf.cs" />
-    <Compile Include="Assets\NewBehaviourScript.cs" />
-    <Compile Include="Assets\Script\Actor\ActorAB.cs" />
+    <Compile Include="Assets\Script\Actor\AActor.cs" />
     <Compile Include="Assets\Script\Actor\AllyConst.cs" />
     <Compile Include="Assets\Script\Actor\EnemyAI.cs" />
+    <Compile Include="Assets\Script\Actor\IActor.cs" />
     <Compile Include="Assets\Script\Actor\Player.cs" />
     <Compile Include="Assets\Script\GameManager\GameManager.cs" />
     <Compile Include="Assets\Script\Map\Map.cs" />

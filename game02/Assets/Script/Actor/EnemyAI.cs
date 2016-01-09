@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyAI : ActorAB {
+public class EnemyAI : AActor,IActor {
 
     public void Update()
     {
