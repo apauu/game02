@@ -6,8 +6,8 @@ using System.Collections;
 /// </summary>
 public class MapTest : MonoBehaviour {
 
-    public Transform prefMap;
-    public Transform prefPlaneTile;
+    public GameObject prefMap;
+    public GameObject prefPlaneTile;
 
     // Use this for initialization
     void Start () {
