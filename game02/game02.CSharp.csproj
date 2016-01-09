@@ -89,6 +89,7 @@
     <Compile Include="Assets\Effect\Tazo_fx\Script\AnimateTiledTextureOnTrail.cs" />
     <Compile Include="Assets\Effect\Tazo_fx\Script\BillBoard.cs" />
     <Compile Include="Assets\Effect\Tazo_fx\Script\DestroySelf.cs" />
+    <Compile Include="Assets\NewBehaviourScript.cs" />
     <Compile Include="Assets\Script\Actor\ActorAB.cs" />
     <Compile Include="Assets\Script\Actor\AllyConst.cs" />
     <Compile Include="Assets\Script\Actor\EnemyAI.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Assets\Script\Map\MapConst.cs" />
     <Compile Include="Assets\Script\Map\MapContoroller.cs" />
     <Compile Include="Assets\Script\Map\Tile.cs" />
+    <Compile Include="Assets\Script\Menu\characterCommandButton.cs" />
     <Compile Include="Assets\Script\Sceane\GameMain.cs" />
     <Compile Include="Assets\Script\Sceane\MapTest.cs" />
     <Compile Include="Assets\Script\Sceane\ProjectStatus.cs" />
