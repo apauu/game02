@@ -6,14 +6,16 @@ using System.Collections;
 /// </summary>
 public class MapTest : MonoBehaviour {
 
-    public Transform myPlaneTile;
+    public Transform prefMap;
+    public Transform prefPlaneTile;
 
     // Use this for initialization
     void Start () {
-        MapContoroller mc = new MapContoroller();
+        MapContoroller mc = this.GetComponent<MapContoroller>();
 
         // マップ１を作成
-        mc.myPlaneTile = myPlaneTile;
+        mc.prefMap = prefMap;
+        mc.prefPlaneTile = prefPlaneTile;
         mc.GenerateMap(MapConst.Map1);
 	}
 	

@@ -7,9 +7,10 @@ using System.Collections.Generic;
 /// </summary>
 public class MapContoroller :MonoBehaviour{
 
-    int defaultMap;
-    Dictionary<int, Map> mapList;
-    public Transform myPlaneTile { get; set; }
+    GameObject myMap;
+    //Dictionary<int, Map> mapList;
+    public Transform prefMap { get; set; }
+    public Transform prefPlaneTile { get; set; }
 
     /// <summary>
     /// 指定されたマップを読み込み生成する
@@ -24,14 +25,19 @@ public class MapContoroller :MonoBehaviour{
             */
             int[][] tileIDArray;
             tileIDArray = loadMapFile(mapID);
+            
+            //マップオブジェクトを作成
+            GameObject obj = Instantiate(prefMap, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0)) as GameObject;
+            myMap = obj;
 
             //タイルの二次元配列を作成
-            List<List<Tile>> tiles = createTiles(tileIDArray);
+            List<List<GameObject>> tiles = createTiles(tileIDArray);
+            //マップクラスに配列を格納
+            Map map = obj.GetComponent<Map>();
+            map.init(mapID, tiles);
 
-            //IDとタイルデータからマップインスタンス生成
-            Map map = new Map(mapID, tiles);
-            mapList.Add(mapID,map);
-            defaultMap = mapID;
+            //マップリストにマップを登録
+            //mapList.Add(mapID,map);
 
             //マップ生成成功
             return true;
@@ -46,11 +52,19 @@ public class MapContoroller :MonoBehaviour{
     }
 
     /// <summary>
+    /// 現在のマップインスタンスを返す
+    /// </summary>
+    public Map GetMap()
+    {
+        return myMap.GetComponent<Map>();
+    }
+
+    /// <summary>
     /// 指定された位置が進行可能か返す
     /// </summary>
     public bool CanEnter(Vector2 vec)
     {
-        return mapList[defaultMap].CanEnter((int)vec.x, (int)vec.y);
+        return myMap.GetComponent<Map>().CanEnter((int)vec.x, (int)vec.y);
     }
 
     /// <summary>
@@ -58,7 +72,7 @@ public class MapContoroller :MonoBehaviour{
     /// </summary>
     public Tile GetTile(Vector2 vec)
     {
-        return mapList[defaultMap].GetTile((int)vec.x, (int)vec.y);
+        return myMap.GetComponent<Map>().GetTile((int)vec.x, (int)vec.y);
     }
 
     private int[][] loadMapFile(int mapID)
@@ -92,24 +106,24 @@ public class MapContoroller :MonoBehaviour{
     }
 
     //タイルIDよりタイルクラスの二次元配列を作成
-    private List<List<Tile>>  createTiles(int[][] tileIDArray)
+    private List<List<GameObject>>  createTiles(int[][] tileIDArray)
     {
-        List<List<Tile>> tiles = new List<List<Tile>>();
+        //【tileIDArray内容未使用】
+        List<List<GameObject>> tiles = new List<List<GameObject>>();
 
-        //セルの数だけタイルを作る
-        Vector2 pos = new Vector2(0, 0);
-        Vector3 realPos = new Vector3(0, 0, 0);
-        Tile tile;
-        for (int x = 0; x < tileIDArray.Length; x++)
+        //親オブジェクトにMapを設定
+        //prefPlaneTile.transform.parent = myMap.transform;
+
+            for (int x = 0; x < tileIDArray.Length; x++)
         {
-            tiles.Add(new List<Tile>());
+            tiles.Add(new List<GameObject>());
             for (int y = 0; y < tileIDArray[0].Length; y++)
             {
-                myPlaneTile.c
-                UnityEngine.Object obj = Instantiate(myPlaneTile, new Vector3(x,MapConst.BaseY,y), new Quaternion(0,0,0,0));
-                obj.
-                //tile = new Tile(MapConst.Plains, pos, realPos);
-                //[x].Add(tile);
+                GameObject obj = Instantiate(prefPlaneTile, new Vector3(x,MapConst.BaseY,y), new Quaternion(0,0,0,0)) as GameObject;
+                //タイル毎に個別の値（位置情報等）を持たせたい場合はここで設定する
+                //Tile t = obj.GetComponent<Tile>();
+                obj.transform.parent = myMap.transform;
+                tiles[x].Add(obj);
             }
         }
 
