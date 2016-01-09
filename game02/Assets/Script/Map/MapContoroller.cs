@@ -9,8 +9,8 @@ public class MapContoroller :MonoBehaviour{
 
     GameObject myMap;
     //Dictionary<int, Map> mapList;
-    public Transform prefMap { get; set; }
-    public Transform prefPlaneTile { get; set; }
+    public GameObject prefMap { get; set; }
+    public GameObject prefPlaneTile { get; set; }
 
     /// <summary>
     /// 指定されたマップを読み込み生成する
@@ -27,7 +27,7 @@ public class MapContoroller :MonoBehaviour{
             tileIDArray = loadMapFile(mapID);
             
             //マップオブジェクトを作成
-            GameObject obj = Instantiate(prefMap, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0)) as GameObject;
+            GameObject obj = Instantiate(prefMap, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
             myMap = obj;
 
             //タイルの二次元配列を作成
@@ -111,15 +111,12 @@ public class MapContoroller :MonoBehaviour{
         //【tileIDArray内容未使用】
         List<List<GameObject>> tiles = new List<List<GameObject>>();
 
-        //親オブジェクトにMapを設定
-        //prefPlaneTile.transform.parent = myMap.transform;
-
             for (int x = 0; x < tileIDArray.Length; x++)
         {
             tiles.Add(new List<GameObject>());
             for (int y = 0; y < tileIDArray[0].Length; y++)
             {
-                GameObject obj = Instantiate(prefPlaneTile, new Vector3(x,MapConst.BaseY,y), new Quaternion(0,0,0,0)) as GameObject;
+                GameObject obj = Instantiate(prefPlaneTile, new Vector3(x,MapConst.BaseY,y), Quaternion.identity) as GameObject;
                 //タイル毎に個別の値（位置情報等）を持たせたい場合はここで設定する
                 //Tile t = obj.GetComponent<Tile>();
                 obj.transform.parent = myMap.transform;
