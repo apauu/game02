@@ -20,9 +20,12 @@ public class GameManager : MonoBehaviour {
     // Singlleton用プロパティ　インスタンスが存在するか？
     static bool existsInstance = false;
 
-    // pricate プロパティ
+    // private プロパティ
     private GameObject menu;
     public GameObject menuCanvasPrefab;
+    // private プロパティ
+    private GameObject command;
+    public GameObject characterCommandCanvasPrefab;
 
     //クラスインスタンス
     MapContoroller mc;
@@ -70,9 +73,16 @@ public class GameManager : MonoBehaviour {
         
         try {
             //プレハブ作成
-            menu = (GameObject)Instantiate(menuCanvasPrefab, new Vector3(0, 0, 0), Quaternion.identity);        
-            //初期表示自に不要なものは非表示にする
+            //メニュー表示用
+            menu = (GameObject)Instantiate(menuCanvasPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            //コマンド表示用
+            command = (GameObject)Instantiate(characterCommandCanvasPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            //初期表示時に不要なものは非表示にする
+            //メニュー
             menu.SetActive(false);
+            //コマンド
+            command.SetActive(false);
+
         }
         catch (UnityException e){
             Debug.Log(e);
@@ -181,5 +191,21 @@ public class GameManager : MonoBehaviour {
 
 
         //Debug.Log(processName);
+    }
+
+    /// <summary>
+    /// メニューのOn/Offを制御する
+    /// </summary>
+    public void menuOnOff(bool isOn)
+    {
+        menu.SetActive(isOn);
+    }
+
+    /// <summary>
+    /// コマンドのOn/Offを制御する
+    /// </summary>
+    public void commandOnOff(bool isOn)
+    {
+        command.SetActive(isOn);
     }
 }

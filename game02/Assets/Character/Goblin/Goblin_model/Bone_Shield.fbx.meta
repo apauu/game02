@@ -1,7 +1,5 @@
 fileFormatVersion: 2
-guid: fb463e377a5920040958737dd07feeda
-timeCreated: 1443252648
-licenseType: Free
+guid: 258d8fe23a2ac6e45a642dba5854cda8
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
@@ -49,13 +47,13 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 1
+    useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
     normalImportMode: 0
     tangentImportMode: 1
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     human: []
@@ -70,9 +68,9 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
-  additionalBone: 0
+  additionalBone: 1
   userData: 
   assetBundleName: 
   assetBundleVariant: 

@@ -80,16 +80,16 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _SpecGlossMap
+          name: _specular
         second:
           m_Texture: {fileID: 2800000, guid: 8acf0c4b6f9bf9a479440f2e41467b22, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _specular
+          name: _ilumination
         second:
-          m_Texture: {fileID: 2800000, guid: 8acf0c4b6f9bf9a479440f2e41467b22, type: 3}
+          m_Texture: {fileID: 2800000, guid: e9aa4928326002242b726ff5cc7ad8b4, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -108,9 +108,9 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _ilumination
+          name: _SpecGlossMap
         second:
-          m_Texture: {fileID: 2800000, guid: e9aa4928326002242b726ff5cc7ad8b4, type: 3}
+          m_Texture: {fileID: 2800000, guid: 8acf0c4b6f9bf9a479440f2e41467b22, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
