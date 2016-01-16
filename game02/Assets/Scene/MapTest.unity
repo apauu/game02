@@ -226,7 +226,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 784064748}
   m_LocalRotation: {x: .625299335, y: 0, z: 0, w: .780385017}
-  m_LocalPosition: {x: 13.79, y: 12, z: 6.90999985}
+  m_LocalPosition: {x: 13.79, y: 28.7999992, z: 3.16000009}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -271,6 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cb9ba9f457c5fc46b192cdb5062bfaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefUnit: {fileID: 100702, guid: a8fe9acb1e0f9f74c81a0ac4738f9efe, type: 2}
   prefMap: {fileID: 147946, guid: 2028077ba1779a742a44957f19a3697e, type: 2}
   prefPlaneTile: {fileID: 158416, guid: c2e69bdd9011fae4ab2578059be02fbf, type: 2}
 --- !u!114 &1069090925

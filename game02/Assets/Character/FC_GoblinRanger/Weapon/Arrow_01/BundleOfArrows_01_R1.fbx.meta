@@ -1,7 +1,5 @@
 fileFormatVersion: 2
-guid: 28d44ae1e2cc74848846e70597f179e6
-timeCreated: 1443252618
-licenseType: Free
+guid: 9d217d7f908441b43bfcf7995230ed1e
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
@@ -10,9 +8,10 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: mesh
+    9500000: //RootNode
   materials:
     importMaterials: 1
-    materialName: 0
+    materialName: 1
     materialSearch: 1
   animations:
     legacyGenerateAnimations: 4
@@ -33,7 +32,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: .00999999978
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -47,13 +46,13 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 1
+    useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
     normalImportMode: 0
     tangentImportMode: 1
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     human: []
@@ -70,7 +69,7 @@ ModelImporter:
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
   humanoidOversampling: 1
-  additionalBone: 0
+  additionalBone: 1
   userData: 
   assetBundleName: 
   assetBundleVariant: 

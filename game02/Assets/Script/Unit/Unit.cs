@@ -4,7 +4,7 @@ using System.Collections.Generic;
 /// <summary>
 /// ユニットの状態を保持するクラス。
 /// </summary>
-public class Unit {
+public class Unit : MonoBehaviour{
     /// <summary>
     /// シーケンスNo
     /// </summary>

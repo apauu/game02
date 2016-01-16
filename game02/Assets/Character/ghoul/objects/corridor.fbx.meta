@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: c9f94133bfd8d0948b04d52bec940778
-timeCreated: 1443252646
-licenseType: Free
+guid: 828b41466df1d8a42a83d2a71cb6ef40
+timeCreated: 1433973270
+licenseType: Store
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
@@ -152,6 +152,35 @@ ModelImporter:
     4300052: floor1_3
     4300054: floor1_4
     4300056: floor1_5
+    6400000: door
+    6400002: door_2
+    6400004: door_3
+    6400006: door_4
+    6400008: floor1
+    6400010: floor1_1
+    6400012: floor1_2
+    6400014: floor1_3
+    6400016: floor1_4
+    6400018: floor1_5
+    6400020: floor1_6
+    6400022: floor1_7
+    6400024: floor1_8
+    6400026: floor1_9
+    6400028: light
+    6400030: light_1
+    6400032: light_2
+    6400034: wall1
+    6400036: wall1_1
+    6400038: wall1_2
+    6400040: wall1_3
+    6400042: wall1_4
+    6400044: wall1_5
+    6400046: wall1_6
+    6400048: wall1_7
+    6400050: walldoor
+    6400052: walldoor_1
+    6400054: walldoor_2
+    6400056: walldoor_3
   materials:
     importMaterials: 1
     materialName: 0
@@ -161,10 +190,6 @@ ModelImporter:
     bakeSimulation: 0
     optimizeGameObjects: 0
     motionNodeName: 
-    animationImportErrors: 
-    animationImportWarnings: 
-    animationRetargetingWarnings: 
-    animationDoRetargetingWarnings: 0
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
@@ -177,8 +202,8 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
-    importBlendShapes: 1
+    addColliders: 1
+    importBlendShapes: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -208,10 +233,8 @@ ModelImporter:
     legStretch: .0500000007
     feetSpacing: 0
     rootMotionBoneName: 
-    hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
-  humanoidOversampling: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

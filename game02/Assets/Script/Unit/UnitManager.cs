@@ -3,27 +3,38 @@ using System.Collections;
 
 public class UnitManager : MonoBehaviour{
 
+    MapContoroller mapcon;
+
+    //初期化
+    public UnitManager(MapContoroller mapcon)
+    {
+        this.mapcon = mapcon;
+    }
+
     //ユニット生成処理
-    public GameObject GenerateUnit(string unitId)
+    public GameObject GenerateUnit(GameObject prefUnit)
     {
         //現在はユニットIDは使わずに素の状態のユニットを作成する
-        GameObject prefUnit;
+        //GameObject prefUnit = null;
         GameObject unitObj = (GameObject)Instantiate(prefUnit, new Vector3(0, 0, 0), Quaternion.identity);
+        unitObj.AddComponent<Unit>();
 
         //生成したユニットを配置する
         //暫定的に位置[5,5]に配置する
-        PlaceUnit(unitObj, 5, 5);
+        PlaceUnit(unitObj, 15, 15);
+        
+        return prefUnit;
 
     }
 
     //生成されたユニットを配置する
-    public bool PlaceUnit(GameObject unitObj, int x, int y)
+    public bool PlaceUnit(GameObject unitObj, int x, int z)
     {
         //ユニットインスタンスを取得する
         Unit unit = unitObj.GetComponent<Unit>();
 
         //配置場所のチェック
-        MapContoroller mapcon = new MapContoroller(); //MapContorollerはマネージャより取得する
+        //MapContoroller mapcon = new MapContoroller(); //MapContorollerはマネージャより取得する
 
         //if (mapcon.CanEnter(x,y)
         //    || UnitManager.CheckPosition(gamePosition))
@@ -35,14 +46,14 @@ public class UnitManager : MonoBehaviour{
         //}
 
         //移動先のタイル位置を取得する
-        Vector3 rpos = mapcon.GetRealPosition(x, y);//タイルの中央位置
+        Vector3 rpos = mapcon.GetRealPosition(x, z);//タイルの中央位置
 
         //ユニットの実際の位置を設定する
-        rpos.z = unitObj.transform.position.z;
+        rpos.y = unitObj.transform.position.y;
         unitObj.transform.position = rpos;
 
         //ユニットのゲーム上の位置を設定する
-        unit.position = new Vector3((float)x, (float)y);
+        unit.position = new Vector3((float)x, 0, (float)z);
 
 
         return true;

@@ -14,15 +14,15 @@ public class MapTest : MonoBehaviour {
     void Start ()
     {
         // マップを作成
-        MapContoroller mc = this.GetComponent<MapContoroller>();
+        MapContoroller mapcon = this.GetComponent<MapContoroller>();
 
-        mc.prefMap = prefMap;
-        mc.prefPlaneTile = prefPlaneTile;
-        mc.GenerateMap(MapConst.Map1);
+        mapcon.prefMap = prefMap;
+        mapcon.prefPlaneTile = prefPlaneTile;
+        mapcon.GenerateMap(MapConst.Map1);
 
         // ユニットを作成
-        UnitManager gm = new UnitManager();
-        gm.GenerateUnit();
+        UnitManager um = new UnitManager(mapcon);
+        um.GenerateUnit(prefUnit);
     }
 
     // Update is called once per frame

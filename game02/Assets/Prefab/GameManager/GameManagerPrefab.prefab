@@ -39,14 +39,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3752b9d161820d34bb5bcd21b344c96d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuCanvasPrefab: {fileID: 133400, guid: 9005da7dbc19f4546b1e0fa3c8ff4480, type: 2}
+  menuCanvasPrefab: {fileID: 162260, guid: 0574d13c85b17fe4ca4b2a5f9cae5507, type: 2}
+  characterCommandCanvasPrefab: {fileID: 152204, guid: e3803bc6185308744bf9866cde9594c9,
+    type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: menuCanvasPrefab
+      value: 
+      objectReference: {fileID: 162260, guid: 0574d13c85b17fe4ca4b2a5f9cae5507, type: 2}
+    - target: {fileID: 0}
+      propertyPath: characterCommandCanvasPrefab
+      value: 
+      objectReference: {fileID: 152204, guid: e3803bc6185308744bf9866cde9594c9, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 160654}
