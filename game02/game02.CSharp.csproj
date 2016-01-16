@@ -90,6 +90,7 @@
     <Compile Include="Assets\Script\Unit\Unit.cs" />
     <Compile Include="Assets\Script\Unit\UnitConst\ExperienceConst.cs" />
     <Compile Include="Assets\Script\Unit\UnitController.cs" />
+    <Compile Include="Assets\Script\Unit\UnitManager.cs" />
     <Compile Include="Assets\Script\Unit\UnitMenue.cs" />
     <Compile Include="Assets\Script\Utility\BGM.cs" />
     <Compile Include="Assets\Script\Utility\CameraControl.cs" />

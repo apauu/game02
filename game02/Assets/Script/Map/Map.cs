@@ -32,4 +32,12 @@ public class Map : MonoBehaviour
         return tiles[x][y].GetComponent<Tile>();
     }
 
+    /// <summary>
+    /// 指定された位置のにあるタイルの中央位置を返す
+    /// </summary>
+    public Vector3 GetRealPosition(int x, int y)
+    {
+        return tiles[x][y].transform.position;  
+    }
+
 }

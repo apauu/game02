@@ -62,18 +62,29 @@ public class MapContoroller :MonoBehaviour{
     /// <summary>
     /// 指定された位置が進行可能か返す
     /// </summary>
-    public bool CanEnter(Vector2 vec)
+    public bool CanEnter(int x ,int y)
     {
-        return myMap.GetComponent<Map>().CanEnter((int)vec.x, (int)vec.y);
+        //return myMap.GetComponent<Map>().CanEnter((int)vec.x, (int)vec.y);
+        return myMap.GetComponent<Map>().CanEnter(x, y);
     }
 
     /// <summary>
     /// 指定された位置の情報（タイル）を返す
     /// </summary>
-    public Tile GetTile(Vector2 vec)
+    public Tile GetTile(int x, int y)
     {
-        return myMap.GetComponent<Map>().GetTile((int)vec.x, (int)vec.y);
+        //return myMap.GetComponent<Map>().GetTile((int)vec.x, (int)vec.y);
+        return myMap.GetComponent<Map>().GetTile(x, y);
     }
+
+    /// <summary>
+    /// 指定された位置のにあるタイルの中央位置を返す
+    /// </summary>
+    public Vector3 GetRealPosition(int x, int y)
+    {
+        return myMap.GetComponent<Map>().GetRealPosition(x, y);
+    }
+
 
     private int[][] loadMapFile(int mapID)
     {
