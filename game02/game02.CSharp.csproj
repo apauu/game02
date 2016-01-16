@@ -92,6 +92,7 @@
     <Compile Include="Assets\Script\Unit\UnitController.cs" />
     <Compile Include="Assets\Script\Unit\UnitMenue.cs" />
     <Compile Include="Assets\Script\Utility\BGM.cs" />
+    <Compile Include="Assets\Script\Utility\CameraControl.cs" />
     <Compile Include="Assets\Script\Utility\GameUI.cs" />
     <Compile Include="Assets\Script\Utility\GraphicEffect.cs" />
     <Compile Include="Assets\Script\Utility\SoundEffect.cs" />
