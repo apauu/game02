@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+
 using System.Collections;
 
 /// <summary>
@@ -7,19 +9,18 @@ using System.Collections;
 public class characterCommandButton : MonoBehaviour {
 
     //private propaties
-    private GameObject gameManagerObject;
-    private GameManager gameManager;
+    private Text characterLevelText;
+    private MenuController menuController;
 
     //private GameManager gameManager;
 
     // Use this for initialization
     void Start () {
-        gameManagerObject = GameObject.Find("GameManagerPrefab");
-        gameManager = gameManagerObject.GetComponent<GameManager>();
+        menuController = MenuController.Instance;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 	
 	}
 
@@ -28,6 +29,11 @@ public class characterCommandButton : MonoBehaviour {
     /// </summary>
     public void OnClick () 
     {
-        gameManager.CharacterCommandFacade(this.gameObject.name);
+        menuController.CharacterCommandFacade(this.gameObject.name);
+    }
+
+    public void ChangeMenuText(Unit expressUnit)
+    {
+
     }
 }

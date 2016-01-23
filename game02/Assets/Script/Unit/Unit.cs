@@ -8,7 +8,7 @@ public class Unit : MonoBehaviour{
     /// <summary>
     /// シーケンスNo
     /// </summary>
-    public string sequenceNo { get; set; }
+    public int sequenceNo { get; set; }
     /// <summary>
     /// ユニットID
     /// </summary>
@@ -152,7 +152,7 @@ public class Unit : MonoBehaviour{
     /// </summary>
     /// <param name="sequenceNO">ユニットシーケンスNO</param>
     /// <param name="unitID">ユニットID</param>
-    public Unit(string sequenceNO, string unitID)
+    public void InitUnit(int sequenceNO, string unitID)
     {
         //ステータスの初期化　ファイル読み込み？
         sequenceNo = sequenceNO;
@@ -182,5 +182,8 @@ public class Unit : MonoBehaviour{
         living = true;
         active = true;
     }
+
+
+
 
 }
