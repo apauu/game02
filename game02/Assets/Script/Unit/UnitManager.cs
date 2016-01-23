@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UnitManager : MonoBehaviour{
+public class UnitManager : SingletonMonoBehaviour<UnitManager>{
 
     MapContoroller mapcon;
+    private  int sequenceCharacterNumber = 0;
+    private GameObject unitObj;
+    public Unit currentSelectUnit { get;  private set; }
 
     //初期化
     public UnitManager(MapContoroller mapcon)
@@ -16,8 +19,12 @@ public class UnitManager : MonoBehaviour{
     {
         //現在はユニットIDは使わずに素の状態のユニットを作成する
         //GameObject prefUnit = null;
-        GameObject unitObj = (GameObject)Instantiate(prefUnit, new Vector3(0, 0, 0), Quaternion.identity);
+        unitObj = (GameObject)Instantiate(prefUnit, new Vector3(0, 0, 0), Quaternion.identity);
         unitObj.AddComponent<Unit>();
+        //Unitの初期化
+        //TODO:ユニットIDを取得/設定する仕組みを作ること
+        currentSelectUnit = unitObj.GetComponent<Unit>();
+        currentSelectUnit.InitUnit(GetSequenceNumber.SequenceNumber(sequenceCharacterNumber), "1");
 
         //生成したユニットを配置する
         //暫定的に位置[5,5]に配置する
@@ -30,8 +37,6 @@ public class UnitManager : MonoBehaviour{
     //生成されたユニットを配置する
     public bool PlaceUnit(GameObject unitObj, int x, int z)
     {
-        //ユニットインスタンスを取得する
-        Unit unit = unitObj.GetComponent<Unit>();
 
         //配置場所のチェック
         //MapContoroller mapcon = new MapContoroller(); //MapContorollerはマネージャより取得する
@@ -53,7 +58,7 @@ public class UnitManager : MonoBehaviour{
         unitObj.transform.position = rpos;
 
         //ユニットのゲーム上の位置を設定する
-        unit.position = new Vector3((float)x, 0, (float)z);
+        currentSelectUnit.position = new Vector3((float)x, 0, (float)z);
 
 
         return true;

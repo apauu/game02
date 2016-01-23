@@ -30,7 +30,7 @@ public class UnitController : MonoBehaviour {
     public UnitController(string sequenceNo,string unitId)
     {
         //ユニットの初期化
-        individualUnit = new Unit(sequenceNo,unitId);
+        //individualUnit = new Unit(sequenceNo,unitId);
     }
 
 
@@ -51,6 +51,7 @@ public class UnitController : MonoBehaviour {
     {
         return individualUnit;
     }
+
 
     /// <summary>
     /// 経験値を与える

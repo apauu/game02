@@ -83,13 +83,15 @@
     <Compile Include="Assets\Script\Actor\EnemyAI.cs" />
     <Compile Include="Assets\Script\Actor\IActor.cs" />
     <Compile Include="Assets\Script\Actor\Player.cs" />
+    <Compile Include="Assets\Script\Define\GameObjectNameConst.cs" />
     <Compile Include="Assets\Script\GameManager\GameManager.cs" />
     <Compile Include="Assets\Script\Map\Map.cs" />
     <Compile Include="Assets\Script\Map\MapConst.cs" />
     <Compile Include="Assets\Script\Map\MapContoroller.cs" />
     <Compile Include="Assets\Script\Map\MapLayer.cs" />
     <Compile Include="Assets\Script\Map\Tile.cs" />
-    <Compile Include="Assets\Script\Menu\characterCommandButton.cs" />
+    <Compile Include="Assets\Script\Menu\CommmandButton.cs" />
+    <Compile Include="Assets\Script\Menu\MenuController.cs" />
     <Compile Include="Assets\Script\Sceane\GameMain.cs" />
     <Compile Include="Assets\Script\Sceane\MapTest.cs" />
     <Compile Include="Assets\Script\Sceane\ProjectStatus.cs" />
@@ -102,7 +104,10 @@
     <Compile Include="Assets\Script\Utility\BGM.cs" />
     <Compile Include="Assets\Script\Utility\CameraControl.cs" />
     <Compile Include="Assets\Script\Utility\GameUI.cs" />
+    <Compile Include="Assets\Script\Utility\GetResource.cs" />
+    <Compile Include="Assets\Script\Utility\GetSequenceNumber.cs" />
     <Compile Include="Assets\Script\Utility\GraphicEffect.cs" />
+    <Compile Include="Assets\Script\Utility\SingletonMonoBehaviour.cs" />
     <Compile Include="Assets\Script\Utility\SoundEffect.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -263,14 +263,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 11478462, guid: 14075f653ca164340b94c8ee239f3954, type: 2}
-      propertyPath: characterCommandCanvasPrefab
-      value: 
-      objectReference: {fileID: 152204, guid: e3803bc6185308744bf9866cde9594c9, type: 2}
-    - target: {fileID: 11478462, guid: 14075f653ca164340b94c8ee239f3954, type: 2}
-      propertyPath: menuCanvasPrefab
-      value: 
-      objectReference: {fileID: 162260, guid: 0574d13c85b17fe4ca4b2a5f9cae5507, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 14075f653ca164340b94c8ee239f3954, type: 2}
   m_IsPrefabParent: 0

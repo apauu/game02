@@ -5,7 +5,8 @@ using System.Collections.Generic;
 /// <summary>
 /// ゲーム全体の進行を管理するクラス。
 /// </summary>
-public class GameManager : MonoBehaviour {
+public class GameManager : SingletonMonoBehaviour<GameManager>
+{
 
     //ゲーム進行状態
     //0:開始前　1:戦闘中
@@ -15,7 +16,6 @@ public class GameManager : MonoBehaviour {
     int currentPlayerNo;
     int turnCnt;
     List<IActor> playerList = new List<IActor>();
-
 
     // Singlleton用プロパティ　インスタンスが存在するか？
     static bool existsInstance = false;
@@ -28,7 +28,9 @@ public class GameManager : MonoBehaviour {
     public GameObject characterCommandCanvasPrefab;
 
     //クラスインスタンス
-    MapContoroller mc;
+    MapContoroller mapcon;
+    UnitManager unitManager;
+    MenuController menuController;
     Player player;
     EnemyAI enemy;
 
@@ -50,6 +52,13 @@ public class GameManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        //マップコントローラー生成
+        mapcon = new MapContoroller();
+        //ユニットマネージャー生成
+        unitManager = new UnitManager(mapcon);
+        //menuController.Init();
+
+
         //マップ、プレイヤー、キャラクターのオブジェクトを生成する
         //GenerateMap();
         //GeneratePlayer();
@@ -66,11 +75,10 @@ public class GameManager : MonoBehaviour {
         //UI関係を生成する
         //GenerateUIObj();
 
-        
         //ユニットの初期配置（ユーザ操作前）を設定する
         //DeployUnits(PlayerUnits);
         //DeployUnits(EnemyUnits);
-        
+
         try {
             //プレハブ作成
             //メニュー表示用
@@ -83,10 +91,21 @@ public class GameManager : MonoBehaviour {
             //コマンド
             command.SetActive(false);
 
+            //ユニット生成
+            unitManager.GenerateUnit(GetResource.GetGameObjectFromResource(GameObjectNameConst.PrefabPath + GameObjectNameConst.UnitPrefab));
+
+            //メニューコントローラー生成
+            menuController = MenuController.Instance;
+            menuController.Init();
+
         }
         catch (UnityException e){
             Debug.Log(e);
         }
+
+
+        //TODO:ステータス表示用のテスト
+        ChangeMenu();
     }
 
     // Update is called once per frame
@@ -178,20 +197,28 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    // キャラクターコマンドを実際の処理に割り振る
-    public void  CharacterCommandFacade(string processName)
+    private Unit GetCurrentUnit()
     {
-        //移動処理
+        return unitManager.currentSelectUnit;
+    } 
 
-        //攻撃処理
+    /// <summary>
+    /// キャラクター移動処理
+    /// </summary>
+    public void characterMove()
+    {
 
-        //妖術処理
-
-        //装備処理
-
-
-        //Debug.Log(processName);
     }
+
+    /// <summary>
+    /// メニューの画像・キャラクターステータスを変更する
+    /// </summary>
+    public void ChangeMenu()
+    {
+        menuController.ChangeMenuText(GetCurrentUnit());
+        //menu.transform.FindChild("Child").gameObject;
+    }
+
 
     /// <summary>
     /// メニューのOn/Offを制御する

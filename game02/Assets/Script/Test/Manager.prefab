@@ -1,75 +1,67 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &160654
+--- !u!1 &183356
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 490636}
-  - 114: {fileID: 11478462}
-  - 114: {fileID: 11466212}
+  - 4: {fileID: 410272}
+  - 114: {fileID: 11450414}
+  - 114: {fileID: 11467084}
   m_Layer: 0
-  m_Name: GameManagerPrefab
+  m_Name: Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &490636
+--- !u!4 &410272
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 160654}
+  m_GameObject: {fileID: 183356}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 322.021606, y: 258.693665, z: 90}
+  m_LocalPosition: {x: .00999999978, y: 0, z: -.0799999982}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11466212
+--- !u!114 &11450414
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 160654}
+  m_GameObject: {fileID: 183356}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5af1f46ea8d0b9a46bc0aa9a494412a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 3cb9ba9f457c5fc46b192cdb5062bfaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11478462
+  prefUnit: {fileID: 100702, guid: a8fe9acb1e0f9f74c81a0ac4738f9efe, type: 2}
+  prefMap: {fileID: 147946, guid: 2028077ba1779a742a44957f19a3697e, type: 2}
+  prefPlaneTile: {fileID: 158416, guid: c2e69bdd9011fae4ab2578059be02fbf, type: 2}
+--- !u!114 &11467084
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 160654}
+  m_GameObject: {fileID: 183356}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3752b9d161820d34bb5bcd21b344c96d, type: 3}
+  m_Script: {fileID: 11500000, guid: 291a90aa2bb8094409b958621d966f2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuCanvasPrefab: {fileID: 162260, guid: 0574d13c85b17fe4ca4b2a5f9cae5507, type: 2}
-  characterCommandCanvasPrefab: {fileID: 152204, guid: e3803bc6185308744bf9866cde9594c9,
-    type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: menuCanvasPrefab
-      value: 
-      objectReference: {fileID: 162260, guid: 0574d13c85b17fe4ca4b2a5f9cae5507, type: 2}
-    - target: {fileID: 0}
-      propertyPath: characterCommandCanvasPrefab
-      value: 
-      objectReference: {fileID: 152204, guid: e3803bc6185308744bf9866cde9594c9, type: 2}
+    m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 160654}
+  m_RootGameObject: {fileID: 183356}
   m_IsPrefabParent: 1
