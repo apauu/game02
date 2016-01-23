@@ -9,6 +9,7 @@ public class MapTest : MonoBehaviour {
     public GameObject prefUnit;
     public GameObject prefMap;
     public GameObject prefPlaneTile;
+    public GameObject prefLayerSquare;
 
     // Use this for initialization
     void Start ()
@@ -23,6 +24,12 @@ public class MapTest : MonoBehaviour {
         // ユニットを作成
         UnitManager um = new UnitManager(mapcon);
         um.GenerateUnit(prefUnit);
+
+        // レイヤーを作成
+        MapLayer ml = new MapLayer();
+
+        ml.initialize(mapcon.GetMap(), prefLayerSquare);
+        ml.ShowMoveLayer(15, 15, 4);
     }
 
     // Update is called once per frame
