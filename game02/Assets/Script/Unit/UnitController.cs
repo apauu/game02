@@ -202,6 +202,7 @@ public class UnitController : MonoBehaviour {
     }
 
     /// <summary>
+<<<<<<< HEAD
     /// ユニットを指定位置に移動させる。未実装
     /// </summary>
     /// <param name="myUnit">行動するユニット</param>
@@ -335,4 +336,20 @@ public class UnitController : MonoBehaviour {
         return true;
     }
 
+=======
+    /// 攻撃・デバフのダメージ、命中率を計算する
+    /// </summary>
+    /// <param name="myUnit"></param>
+    /// <param name="enemyUnit"></param>
+    /// <param name="attackKind"></param>
+    /// <returns></returns>
+    public Dictionary<string,string> CalPreBattleResults(Unit myUnit, Unit enemyUnit,string attackKind)
+    {
+        //戦闘結果を保持する
+        Dictionary<string,string> battlePreResults = new Dictionary<string, string>();
+
+
+        return battlePreResults;
+    } 
+>>>>>>> 14264b15e9cc4a5a9c8ae12c1c425cb76ade06ea
 }
