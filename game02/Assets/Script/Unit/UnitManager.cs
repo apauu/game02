@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class UnitManager : SingletonMonoBehaviour<UnitManager>{
 
@@ -7,6 +8,9 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
     private  int sequenceCharacterNumber = 0;
     private GameObject unitObj;
     public Unit currentSelectUnit { get;  private set; }
+
+    //マップ上の全ユニットリスト
+    List<Unit> unitList;
 
     //初期化
     public UnitManager(MapContoroller mapcon)
@@ -31,6 +35,18 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
         PlaceUnit(unitObj, 15, 15);
         
         return prefUnit;
+
+    }
+
+    //プレイヤー単位のユニット生成メソッド
+    public void GenerateAactorUnits(AActor actor)
+    {
+        //プレーヤーからユニット情報を取得して配置する
+        foreach (Unit u in actor.unitList)
+        {
+            //プレハブを元に生成ではなくユニットクラスを元に生成？
+            //GenerateUnit(u);
+        }
 
     }
 
@@ -62,5 +78,82 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
 
 
         return true;
+    }
+
+    //指定プレイヤーのユニットで未行動のものがいるか確認
+    public bool CanMoveUnit(AActor actor)
+    {
+        int ally = actor.ally;
+
+        foreach(Unit u in unitList)
+        {
+            if (u.ally == ally)
+            {
+                //ユニットが行動可能ならtrue
+                if(u.active)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    //指定プレイヤーのユニットの数を返す
+    public int getUnitCount(AActor actor)
+    {
+        int cnt = 0;
+        int ally = actor.ally;
+
+        foreach (Unit u in unitList)
+        {
+            if (u.ally == ally)
+            {
+                cnt++;
+            }
+        }
+
+        return cnt;
+    }
+
+    //指定ユニットから一番近い指定陣営のユニットを取得する
+    public Unit getNearestEnemy(Unit u)
+    {
+        return getNearestUnit(u, -1);
+    }
+
+    //指定ユニットから一番近い指定陣営のユニットを取得する
+    public Unit getNearestFriend(Unit u)
+    {
+        return getNearestUnit(u, u.ally);
+    }
+
+    //指定ユニットから一番近い指定陣営のユニットを取得する
+    //陣営が-1の場合、味方以外の陣営を探す
+    //指定陣営のユニットがいない場合自身を返す
+    public Unit getNearestUnit(Unit myUnit, int ally)
+    {
+        Unit nearestUnit = myUnit;
+
+        //距離
+        int nowDist = 100;
+
+        foreach (Unit u in unitList)
+        {
+            if (!(ally != -1 && u.ally == ally)
+                || (ally == -1 && u.ally != myUnit.ally))
+            {
+                //前のユニットより近い場合
+                int dist = (int)(Mathf.Abs(u.position.x - myUnit.position.x) + Mathf.Abs(u.position.y - myUnit.position.y));
+                if (nowDist > dist)
+                {
+                    nowDist = dist;
+                    nearestUnit = u;
+                }
+            }
+        }
+
+        return nearestUnit;
     }
 }

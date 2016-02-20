@@ -99,9 +99,9 @@ public class Unit : MonoBehaviour{
     public int baseMagic { get; set; }
 
     /// <summary>
-    /// 武器ID
+    /// 武器
     /// </summary>
-    public string weaponId { get; set; }
+    public Weapon weapon { get; set; }
 
     /// <summary>
     /// 生死 true:生 false:死
@@ -112,14 +112,18 @@ public class Unit : MonoBehaviour{
     /// </summary>
     public bool active { get; set; }
     /// <summary>
-    /// バフ・デバフ
-    /// </summary>
-    private Dictionary<string, int> buffDebuff = new Dictionary<string, int>();
-
-    /// <summary>
     /// 位置
     /// </summary>
     public Vector3 position;
+
+    /// <summary>
+    /// バフ・デバフ
+    /// </summary>
+    private Dictionary<string, int> buffDebuff = new Dictionary<string, int>();
+    /// <summary>
+    /// 所持スキル
+    /// </summary>
+    public List<Skill> skills = new List<Skill>();
 
 
 
@@ -145,6 +149,25 @@ public class Unit : MonoBehaviour{
     {
         return buffDebuff;
     }
+
+    /// <summary>
+    /// スキルを設定する
+    /// </summary>
+    /// <param name="lestTurn">残ターン数</param>
+    public void SetSkill(Skill skill)
+    {
+        skills.Add(skill);
+    }
+
+    /// <summary>
+    /// 指定の番号のスキルを返却する
+    /// </summary>
+    /// <returns>バフ・デバフのID、残ターン数</returns>
+    public Skill GetSkill(int skillNo)
+    {
+        return skills[skillNo];
+    }
+
 
     /// <summary>
     /// Unitクラスコンストラクタ
@@ -178,9 +201,9 @@ public class Unit : MonoBehaviour{
         currentHit = baseHit;
         baseMagic = 1;
         currentMagic = baseMagic;
-        weaponId = null;
         living = true;
         active = true;
+
     }
 
 

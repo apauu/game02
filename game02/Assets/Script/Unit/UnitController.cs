@@ -19,9 +19,15 @@ public class UnitController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
 
+    }
+
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    public UnitController()
+    {
+    }
 
     /// <summary>
     /// コンストラクタ
@@ -105,10 +111,13 @@ public class UnitController : MonoBehaviour {
     /// <summary>
     /// 武器を変更する
     /// </summary>
-    /// <param name="weaponID">武器ID</param>
+    /// <param name="weaponID">装備ID</param>
     public void ChangeWeapon(string weaponID)
     {
-        individualUnit.weaponId = weaponID;
+        //武器を取得する（未実装）
+        Weapon weapon = new Weapon();
+
+        individualUnit.weapon = weapon;
     }
 
     /// <summary>
@@ -191,4 +200,139 @@ public class UnitController : MonoBehaviour {
     {
 
     }
+
+    /// <summary>
+    /// ユニットを指定位置に移動させる。未実装
+    /// </summary>
+    /// <param name="myUnit">行動するユニット</param>
+    /// <param name="position">移動先</param>
+    public void Move(Unit myUnit, Vector3 position)
+    {
+        //移動力取得
+        int mobi = myUnit.currentMobility;
+        Vector3 nowPos = myUnit.position;
+
+        while(mobi > 0)
+        {
+            //移動力がなくなるまで縦と横を交互に移動
+            Vector3 nextPos = position;
+            //ユニットが次の移動先に侵入可能か判定
+            //if ()
+            //ユニットを移動させる
+            myUnit.position = nextPos;
+
+            mobi--;
+        }
+    }
+
+    public bool CanTargetSupport(Unit myUnit, Unit targetUnit)
+    {
+        return CanTarget(myUnit, targetUnit, false);
+    }
+
+    public bool CanTargetAttack(Unit myUnit, Unit targetUnit)
+    {
+        return CanTarget(myUnit, targetUnit, true);
+    }
+
+    /// <summary>
+    /// 行動範囲に対象がいるかチェック
+    /// </summary>
+    /// <param name="myUnit">行動するユニット</param>
+    /// <param name="targetUnit">相手ユニット</param>
+    /// <param name="attack">行動が攻撃ならtrue、補助ならfalse</param>
+    public bool CanTarget(Unit myUnit, Unit targetUnit, bool attack)
+    {
+        //行動可能なユニットかチェック
+        if (!myUnit.active)
+        {
+            return false;
+        }
+
+        //行動対象のユニットかチェック
+        if (attack && myUnit.ally == targetUnit.ally)
+        {
+            return false;
+        }
+        if (!attack && myUnit.ally != targetUnit.ally)
+        {
+            return false;
+        }
+
+        //行動範囲を取得
+        List<Vector3> atkArea = GetSkillArea(myUnit, attack);
+        if (atkArea.Count == 0)
+        {
+            return false;
+        }
+
+        //攻撃範囲の中に敵ユニットがいるかチェック
+        //いる場合true
+        foreach (Vector3 v in atkArea)
+        {
+            if (targetUnit.position.Equals(v))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// 行動範囲を取得
+    /// </summary>
+    /// <param name="myUnit">行動するユニット</param>
+    /// <param name="attack">行動が攻撃ならtrue、補助ならfalse</param>
+    public List<Vector3> GetSkillArea(Unit myUnit, bool attack)
+    {
+        HashSet<Vector3> skillArea = new HashSet<Vector3>();
+
+        //対象となるすべてのスキルを取得する
+        //foreach(Skill skill in myUnit.skills)
+        //{
+
+        //}
+        Skill skill = new Skill();
+        int range = 1;
+
+        //範囲攻撃なら範囲攻撃の射程を足す
+        if (skill.area)
+        {
+            range =+ skill.areaRange;
+        }
+
+        //自身を起点としたエリアをリストにして返す
+        Vector3 v = myUnit.position;
+
+        for(int x = 0; x > range; x++)
+        {
+            for (int y = 0; y > range; y++)
+            {
+                v = new Vector3(myUnit.position.x + (float)x, myUnit.position.y + (float)y);
+                skillArea.Add(v);
+                v = new Vector3(myUnit.position.x - (float)x, myUnit.position.y + (float)y);
+                skillArea.Add(v);
+                v = new Vector3(myUnit.position.x + (float)x, myUnit.position.y - (float)y);
+                skillArea.Add(v);
+                v = new Vector3(myUnit.position.x - (float)x, myUnit.position.y - (float)y);
+                skillArea.Add(v);
+            }
+        }
+
+        return skillArea.ToList();
+    }
+
+    /// <summary>
+    /// 攻撃行動をする
+    /// </summary>
+    /// <param name="myUnit">行動するユニット</param>
+    /// <param name="targetUnit">相手ユニット</param>
+    /// <param name="skillNo">行動ユニットのスキル番号</param>
+    public bool Attack(Unit myUnit, Unit targetUnit, int skillNo)
+    {
+
+        return true;
+    }
+
 }

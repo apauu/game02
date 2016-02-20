@@ -15,7 +15,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     //0:プレイヤー　1:敵
     int currentPlayerNo;
     int turnCnt;
-    List<IActor> playerList = new List<IActor>();
+    List<AActor> playerList = new List<AActor>();
 
     // Singlleton用プロパティ　インスタンスが存在するか？
     static bool existsInstance = false;
@@ -28,7 +28,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public GameObject characterCommandCanvasPrefab;
 
     //クラスインスタンス
-    MapContoroller mapcon;
+    MapContoroller mapCon;
+    UnitController unitCon;
     UnitManager unitManager;
     MenuController menuController;
     Player player;
@@ -52,32 +53,35 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     // Use this for initialization
     void Start () {
-        //マップコントローラー生成
-        mapcon = new MapContoroller();
+        //コントローラー生成
+        mapCon = new MapContoroller();
+        unitCon = new UnitController();
         //ユニットマネージャー生成
-        unitManager = new UnitManager(mapcon);
+        unitManager = new UnitManager(mapCon);
         //menuController.Init();
 
+        //マップ、プレイヤーのオブジェクトを生成する
+        //mapCon.GenerateMap(MapConst.Map1);
+        player = new Player(this, unitManager,mapCon, unitCon);
+        enemy = new EnemyAI(this, unitManager, mapCon, unitCon);
 
-        //マップ、プレイヤー、キャラクターのオブジェクトを生成する
-        //GenerateMap();
-        //GeneratePlayer();
-        //GenerateEnemy();
-        //GenerateUnits(Player);
-        //GenerateUnits(Enemy);
+        //キャラクターを生成する
+        unitManager.GenerateAactorUnits(player);
+        unitManager.GenerateAactorUnits(enemy);
+
+        //ユニットの初期配置（ユーザ操作前）を設定する
+        //↓生成時に配置できれば不要？
+        //DeployUnits(PlayerUnits);
+        //DeployUnits(EnemyUnits);
 
         //初回ターン設定
         currentPlayerNo = 0;
         turnCnt = 1;
-        //playerList.Add(player); //0番目がプレイヤー
-        //playerList.Add(enemy);　//1番目がエネミー
+        playerList.Add(player); //0番目がプレイヤー
+        playerList.Add(enemy); //1番目がエネミー
 
         //UI関係を生成する
         //GenerateUIObj();
-
-        //ユニットの初期配置（ユーザ操作前）を設定する
-        //DeployUnits(PlayerUnits);
-        //DeployUnits(EnemyUnits);
 
         try {
             //プレハブ作成
@@ -117,18 +121,18 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             //プレイヤーターンの場合
             if (currentPlayerNo == 0)
             {
-                UpdatePlayer(player);
+                player.Update();
             }
             //敵ターンの場合
             else
             {
-                UpdateEnemy(enemy);
+                enemy.Update();
             }
         }
         //戦闘開始前の場合
         else if (flgBattle == 0) {
             //プレイヤー側の準備操作が終了したら戦闘開始する
-            if (StartPlayer(player))
+            if (player.PreStart())
             {
                 flgBattle = 1;
             }
@@ -138,45 +142,36 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             //何もしない
         }
 
-        //動かせるユニットがいなければターン権限を次のプレイヤーに進める
-        //if (!CanMoveUnit(playerList[currentPlayerNo]))
-        //{
-        //    currentPlayerNo++;
-        //    if (currentPlayerNo > playerList.Count)
-        //    {
-        //        currentPlayerNo = 0;
-        //        //ターン数をカウントアップ
-        //        turnCnt++;
-        //    }
-        //}
+        //ユニットマネージャに指定陣営で行動可能のユニットがいるか確認依頼
+        if (!unitManager.CanMoveUnit(playerList[currentPlayerNo]))
+        {
+            //毎ターン勝敗判定を行う
+            if (Judgement())
+            {
+                //終了処理
+                GameFinish();
+                while (!Input.anyKeyDown) { flgBattle = 2; } //キー入力待ち
+
+            } else
+            {
+                //動かせるユニットがいなければターン権限を次のプレイヤーに進める
+                currentPlayerNo++;
+                if (currentPlayerNo > playerList.Count)
+                {
+                    currentPlayerNo = 0;
+                    //ターン数をカウントアップ
+                    turnCnt++;
+                }
+
+            }
+        }
     }
 
-    //プレイヤーの開始時行動
-    bool StartPlayer(Player actor)
-    {
-        return false;
-    }
-
-    //プレイヤーの行動
-    void UpdatePlayer(Player actor)
-    {
-    }
-
-    //敵プレイヤーの行動
-    void UpdateEnemy(EnemyAI actor)
-    {
-    }
-
-    //現在のプレイヤーのユニットで未行動のものがいるか確認
-    //bool CanMoveUnit()
-    //{
-    //    return false;
-    //}
-
+    //未使用
     // 勝利条件に関わる物を監視し、勝利条件を満たした場合ゲームを終了する
     public void ObserveWinLose()
     {
-        if (EndJudgement())
+        if (Judgement())
         {
             //終了処理
             GameFinish();
@@ -186,8 +181,17 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
 
     //ゲームの終了判定
-    bool EndJudgement()
+    bool Judgement()
     {
+        //ユニットが0体のプレイヤーがいないか調べる。いるならtrue
+        foreach(AActor actor in playerList)
+        {
+            if (unitManager.getUnitCount(actor) == 0)
+            {
+                return true;
+            }
+        }
+
         return false;
     }
 
