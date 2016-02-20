@@ -10,13 +10,13 @@ public class characterCommandButton : MonoBehaviour {
 
     //private propaties
     private Text characterLevelText;
-    private MenuController menuController;
+    private MenuManager menuManager;
 
     //private GameManager gameManager;
 
     // Use this for initialization
     void Start () {
-        menuController = MenuController.Instance;
+        menuManager = MenuManager.Instance;
     }
 
     // Update is called once per frame
@@ -29,7 +29,7 @@ public class characterCommandButton : MonoBehaviour {
     /// </summary>
     public void OnClick () 
     {
-        menuController.CharacterCommandFacade(this.gameObject.name);
+        menuManager.CharacterCommandFacade(this.gameObject.name);
     }
 
     public void ChangeMenuText(Unit expressUnit)

@@ -51,17 +51,11 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
@@ -91,11 +85,12 @@
     <Compile Include="Assets\Script\Map\MapLayer.cs" />
     <Compile Include="Assets\Script\Map\Tile.cs" />
     <Compile Include="Assets\Script\Menu\CommmandButton.cs" />
-    <Compile Include="Assets\Script\Menu\MenuController.cs" />
+    <Compile Include="Assets\Script\Menu\MenuManager.cs" />
     <Compile Include="Assets\Script\Sceane\GameMain.cs" />
     <Compile Include="Assets\Script\Sceane\MapTest.cs" />
     <Compile Include="Assets\Script\Sceane\ProjectStatus.cs" />
     <Compile Include="Assets\Script\Test\MenuOnOffTest.cs" />
+    <Compile Include="Assets\Script\Test\StatusDisplayTest.cs" />
     <Compile Include="Assets\Script\Unit\Unit.cs" />
     <Compile Include="Assets\Script\Unit\UnitConst\ExperienceConst.cs" />
     <Compile Include="Assets\Script\Unit\UnitController.cs" />

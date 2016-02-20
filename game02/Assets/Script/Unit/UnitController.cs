@@ -191,4 +191,20 @@ public class UnitController : MonoBehaviour {
     {
 
     }
+
+    /// <summary>
+    /// 攻撃・デバフのダメージ、命中率を計算する
+    /// </summary>
+    /// <param name="myUnit"></param>
+    /// <param name="enemyUnit"></param>
+    /// <param name="attackKind"></param>
+    /// <returns></returns>
+    public Dictionary<string,string> CalPreBattleResults(Unit myUnit, Unit enemyUnit,string attackKind)
+    {
+        //戦闘結果を保持する
+        Dictionary<string,string> battlePreResults = new Dictionary<string, string>();
+
+
+        return battlePreResults;
+    } 
 }

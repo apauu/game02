@@ -17,9 +17,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     int turnCnt;
     List<IActor> playerList = new List<IActor>();
 
-    // Singlleton用プロパティ　インスタンスが存在するか？
-    static bool existsInstance = false;
-
     // private プロパティ
     private GameObject menu;
     public GameObject menuCanvasPrefab;
@@ -30,25 +27,21 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     //クラスインスタンス
     MapContoroller mapcon;
     UnitManager unitManager;
-    MenuController menuController;
+    MenuManager menuManager;
     Player player;
     EnemyAI enemy;
 
-    // 初期化
-    void Awake()
+    public void Awake()
     {
-        // インスタンスが存在するなら破棄する
-        if (existsInstance)
+        if (this != Instance)
         {
-            Destroy(gameObject);
+            Destroy(this);
             return;
         }
 
-        // 存在しない場合
-        // 自身が唯一のインスタンスとなる
-        existsInstance = true;
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(this.gameObject);
     }
+
 
     // Use this for initialization
     void Start () {
@@ -92,11 +85,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             command.SetActive(false);
 
             //ユニット生成
-            unitManager.GenerateUnit(GetResource.GetGameObjectFromResource(GameObjectNameConst.PrefabPath + GameObjectNameConst.UnitPrefab));
+            //unitManager.GenerateUnit(GetResource.GetGameObjectFromResource(GameObjectNameConst.PrefabPath + GameObjectNameConst.UnitPrefab));
 
             //メニューコントローラー生成
-            menuController = MenuController.Instance;
-            menuController.Init();
+            menuManager = MenuManager.Instance;
+            menuManager.Init();
 
         }
         catch (UnityException e){
@@ -104,8 +97,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         }
 
 
-        //TODO:ステータス表示用のテスト
-        ChangeMenu();
+
     }
 
     // Update is called once per frame
@@ -215,7 +207,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     /// </summary>
     public void ChangeMenu()
     {
-        menuController.ChangeMenuText(GetCurrentUnit());
+        menuManager.UpdateMenuStatus(GetCurrentUnit());
         //menu.transform.FindChild("Child").gameObject;
     }
 

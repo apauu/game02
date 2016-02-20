@@ -14,6 +14,11 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
         this.mapcon = mapcon;
     }
 
+    //初期化
+    public UnitManager()
+    {
+    }
+
     //ユニット生成処理
     public GameObject GenerateUnit(GameObject prefUnit)
     {
@@ -28,7 +33,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
 
         //生成したユニットを配置する
         //暫定的に位置[5,5]に配置する
-        PlaceUnit(unitObj, 15, 15);
+        //PlaceUnit(unitObj, 5, 5);
         
         return prefUnit;
 
@@ -63,4 +68,6 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
 
         return true;
     }
+
+
 }

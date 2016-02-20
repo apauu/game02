@@ -54,7 +54,13 @@ public class Unit : MonoBehaviour{
     /// </summary>
     public int currentHp { get; set; }
     /// <summary>
-    /// 基本妖力（HP）
+    /// 基本バフ後妖力（HP）.
+    /// バフを受けた後の最大HP
+    /// </summary>
+    public int baseChangeHp { get; set; }
+    /// <summary>
+    /// 基本妖力（HP）.
+    /// バフ前の最大HP
     /// </summary>
     public int baseHp { get; set; }
     /// <summary>
@@ -167,6 +173,7 @@ public class Unit : MonoBehaviour{
         baseMobility = 1;
         currentMobility = baseMobility;
         baseHp = 1;
+        baseChangeHp = 2;
         currentHp = baseHp;
         baseAtk = 1;
         currentAtk = baseAtk;
