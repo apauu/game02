@@ -84,8 +84,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
 
         return true;
     }
-
-<<<<<<< HEAD
+    
     //指定プレイヤーのユニットで未行動のものがいるか確認
     public bool CanMoveUnit(AActor actor)
     {
@@ -162,7 +161,4 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
 
         return nearestUnit;
     }
-=======
-
->>>>>>> 14264b15e9cc4a5a9c8ae12c1c425cb76ade06ea
 }
