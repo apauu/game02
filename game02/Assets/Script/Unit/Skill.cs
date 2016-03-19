@@ -6,17 +6,23 @@
 public class Skill
 {
     /// <summary>
-    /// スキル名
+    /// スキル名.
     /// </summary>
     public string name { get; set; }
     /// <summary>
-    /// 攻撃力
+    /// 技倍率.
+    /// 
+    /// 倍率で表現
+    /// 通常攻撃に対して20%ダメージアップの場合は1.2を設定する
     /// </summary>
-    public int power { get; set; }
+    public double power { get; set; }
     /// <summary>
-    /// 命中率
+    /// 命中率.
+    /// 
+    /// 倍率で表現
+    /// 命中率が70%の場合は0.7を設定する
     /// </summary>
-    public int hit { get; set; }
+    public double hit { get; set; }
     /// <summary>
     /// 射程
     /// </summary>
@@ -38,12 +44,25 @@ public class Skill
     /// </summary>
     public bool attack { get; set; }
     /// <summary>
-    /// 行動属性
+    /// 行動属性.
+    /// 設定にはSkillConstを利用すること
     /// </summary>
     public int attribute { get; set; }
     /// <summary>
     /// 追加効果
     /// </summary>
     public Dictionary<string, int> addEffect { get; set; }
+
+    /// <summary>
+    /// Skillコンストラクタ.
+    /// 
+    /// skillIdから値を設定する
+    /// </summary>
+    /// <param name="sequenceNO"></param>
+    /// <param name="skillId"></param>
+    public Skill()
+    {
+
+    }
 
 }
