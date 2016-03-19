@@ -14,6 +14,10 @@ public static class GameObjectNameConst
     /// キャラクターコマンドキャンバスプレハブ名称.
     /// </summary>
     public const string CharacterCommandCanvasPrefab = "characterCommandCanvas";
+    /// <summary>
+    /// キャラクター装備キャンバスプレハブ名称.
+    /// </summary>
+    public const string CharacterEquipCanvasPrefab = "characterEquipCanvas";
 
     /*現在選択されているキャラクター（敵味方両方）用のUIオブジェクト*/
     /// <summary>
@@ -66,5 +70,10 @@ public static class GameObjectNameConst
 
     public const string MapPrefab = "Map";
     public const string UnitPrefab = "Goblin";
+
+    /// <summary>
+    /// 平地用タイル
+    /// </summary>
+    public const string PlaneTilePrefab = "Tile";
 
 }

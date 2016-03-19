@@ -13,6 +13,23 @@ public class MapContoroller :MonoBehaviour{
     public GameObject prefPlaneTile { get; set; }
 
     /// <summary>
+    /// テスト用マップ生成メソッド
+    /// </summary>
+    /// <returns></returns>
+    public bool GenerateMapTest(int mapID)
+    {
+        GameObject mapPref = new GameObject();
+        mapPref.name = MapConst.MapName1;
+        mapPref.AddComponent<Map>();
+        prefMap = mapPref;
+        prefPlaneTile = GetResource.GetGameObjectFromResource(GameObjectNameConst.TexturePath + GameObjectNameConst.PlaneTilePrefab);
+
+        GenerateMap(mapID);
+
+        return true;
+    }
+
+    /// <summary>
     /// 指定されたマップを読み込み生成する
     /// </summary>
     public bool GenerateMap (int mapID)

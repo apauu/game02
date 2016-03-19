@@ -9,6 +9,9 @@ public static class MapConst {
     public const int Map2 = 2;
     public const int Map3 = 3;
 
+    // マップ名
+    public const string MapName1 = "Map1";
+
     // タイルID
     // 移動力補正なし
     public const int Plains = 0;

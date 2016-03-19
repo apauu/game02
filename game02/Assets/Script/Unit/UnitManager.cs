@@ -11,6 +11,8 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
 
     //マップ上の全ユニットリスト
     List<Unit> unitList;
+    //マップ上の全ユニットリスト
+    List<UnitController> uniconList = new List<UnitController>();
 
     //初期化
     public UnitManager(MapContoroller mapcon)
@@ -24,12 +26,14 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
     }
 
     //ユニット生成処理
+    //ユニットのステータス初期化等を踏まえ、Generatorクラスに移行予定
     public GameObject GenerateUnit(GameObject prefUnit)
     {
         //現在はユニットIDは使わずに素の状態のユニットを作成する
         //GameObject prefUnit = null;
         unitObj = (GameObject)Instantiate(prefUnit, new Vector3(0, 0, 0), Quaternion.identity);
         unitObj.AddComponent<Unit>();
+        unitObj.AddComponent<UnitController>();
         //Unitの初期化
         //TODO:ユニットIDを取得/設定する仕組みを作ること
         currentSelectUnit = unitObj.GetComponent<Unit>();
@@ -39,13 +43,25 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
         //暫定的に位置[5,5]に配置する
         //PlaceUnit(unitObj, 5, 5);
         
-        return prefUnit;
+        return unitObj;
+
+    }
+
+    //テスト用ユニット生成メソッド
+    public void GenerateUnitsTest(AActor actor)
+    {
+        //テスト用ゴブリン生成
+        UnitGenerator ug = new UnitGenerator();
+        GameObject unitObj = GenerateUnit(ug.getTestUnitPrefab(UnitConst.UnitID1));
+        UnitController unicon = unitObj.GetComponent<UnitController>();
+        uniconList.Add(unicon);
 
     }
 
     //プレイヤー単位のユニット生成メソッド
     public void GenerateAactorUnits(AActor actor)
     {
+
         //プレーヤーからユニット情報を取得して配置する
         foreach (Unit u in actor.unitList)
         {
@@ -160,5 +176,16 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
         }
 
         return nearestUnit;
+    }
+
+    /// <summary>
+    /// ユニット選択時のアクション。テスト用
+    /// </summary>
+    public void selectUnitTest(GameObject unitObj)
+    {
+        UnitController unicon = unitObj.GetComponent<UnitController>();
+        Unit unit = unicon.GetIndividualUnit();
+
+        currentSelectUnit = unit;
     }
 }

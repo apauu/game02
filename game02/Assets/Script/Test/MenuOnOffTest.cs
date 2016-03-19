@@ -23,12 +23,12 @@ public class MenuOnOffTest : MonoBehaviour {
 
     public void ChangeToggleMenu()
     {
-        gameManager.menuOnOff(toggle.isOn);
+        //gameManager.menuOnOff(toggle.isOn);
     }
 
     public void ChangeToggleCommand()
     {
-        gameManager.commandOnOff(toggle.isOn);
+        //gameManager.commandOnOff(toggle.isOn);
     }
 
 }

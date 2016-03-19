@@ -10,7 +10,7 @@ public class UnitController : MonoBehaviour {
     /// <summary>
     /// ユニットクラス
     /// </summary>
-    public Unit individualUnit;
+    private Unit individualUnit;
 
     // Use this for initialization
     void Start () {
@@ -114,8 +114,9 @@ public class UnitController : MonoBehaviour {
     /// <param name="weaponID">装備ID</param>
     public void ChangeWeapon(string weaponID)
     {
-        //武器を取得する（未実装）
-        Weapon weapon = new Weapon();
+        //武器を取得する
+        WeaponGenerator wg = new WeaponGenerator();
+        Weapon weapon = wg.getInstance(weaponID);
 
         individualUnit.weapon = weapon;
     }

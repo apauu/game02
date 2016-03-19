@@ -19,10 +19,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     // private プロパティ
     private GameObject menu;
-    public GameObject menuCanvasPrefab;
+    private GameObject menuCanvasPrefab;
     // private プロパティ
     private GameObject command;
-    public GameObject characterCommandCanvasPrefab;
+    private GameObject characterCommandCanvasPrefab;
 
     //クラスインスタンス
     MapContoroller mapCon;
@@ -45,62 +45,58 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
 
     // Use this for initialization
-    void Start () {
-        //コントローラー生成
-        mapCon = new MapContoroller();
-        unitCon = new UnitController();
-        //ユニットマネージャー生成
-        unitManager = new UnitManager(mapCon);
-        //menuController.Init();
-
-        //マップ、プレイヤーのオブジェクトを生成する
-        //mapCon.GenerateMap(MapConst.Map1);
-        player = new Player(this, unitManager,mapCon, unitCon);
-        enemy = new EnemyAI(this, unitManager, mapCon, unitCon);
-
-        //キャラクターを生成する
-        unitManager.GenerateAactorUnits(player);
-        unitManager.GenerateAactorUnits(enemy);
-
-        //ユニットの初期配置（ユーザ操作前）を設定する
-        //↓生成時に配置できれば不要？
-        //DeployUnits(PlayerUnits);
-        //DeployUnits(EnemyUnits);
-
-        //初回ターン設定
-        currentPlayerNo = 0;
-        turnCnt = 1;
-        playerList.Add(player); //0番目がプレイヤー
-        playerList.Add(enemy); //1番目がエネミー
-
-        //UI関係を生成する
-        //GenerateUIObj();
-
-        try {
-            //プレハブ作成
-            //メニュー表示用
-            menu = (GameObject)Instantiate(menuCanvasPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-            //コマンド表示用
-            command = (GameObject)Instantiate(characterCommandCanvasPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-            //初期表示時に不要なものは非表示にする
-            //メニュー
-            menu.SetActive(false);
-            //コマンド
-            command.SetActive(false);
-
-            //ユニット生成
-            //unitManager.GenerateUnit(GetResource.GetGameObjectFromResource(GameObjectNameConst.PrefabPath + GameObjectNameConst.UnitPrefab));
+    void Start ()
+    {
+        try
+        {
+            //コントローラー生成
+            mapCon = new MapContoroller();
+            unitCon = new UnitController();
+            //ユニットマネージャー生成
+            unitManager = new UnitManager(mapCon);
 
             //メニューコントローラー生成
             menuManager = MenuManager.Instance;
-            menuManager.Init();
+            //menuManager.Init();
+
+            //メニュー表示用
+            //menuManager.GenerateMenu();
+
+            //マップ、プレイヤーのオブジェクトを生成する
+            //mapCon.GenerateMap(MapConst.Map1);
+            player = new Player(this, unitManager, mapCon, unitCon, menuManager);
+            enemy = new EnemyAI(this, unitManager, mapCon, unitCon, menuManager);
+
+            //テスト用マップ生成
+            mapCon.GenerateMapTest(MapConst.Map1);
+
+            //キャラクターを生成する
+            //unitManager.GenerateAactorUnits(player);
+            //unitManager.GenerateAactorUnits(enemy);
+
+            //キャラクター生成テスト
+            unitManager.GenerateUnitsTest(player);
+
+            //ユニットの初期配置（ユーザ操作前）を設定する
+            //↓生成時に配置できれば不要？
+            //DeployUnits(PlayerUnits);
+            //DeployUnits(EnemyUnits);
+
+            //初回ターン設定
+            currentPlayerNo = 0;
+            turnCnt = 1;
+            flgBattle = 0;
+            playerList.Add(player); //0番目がプレイヤー
+            playerList.Add(enemy); //1番目がエネミー
+
+            //テスト用に戦闘前フェーズをスキップ
+            flgBattle = 1;
 
         }
-        catch (UnityException e){
+        catch (UnityException e)
+        {
             Debug.Log(e);
         }
-
-
 
     }
 
@@ -134,29 +130,29 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             //何もしない
         }
 
-        //ユニットマネージャに指定陣営で行動可能のユニットがいるか確認依頼
-        if (!unitManager.CanMoveUnit(playerList[currentPlayerNo]))
-        {
-            //毎ターン勝敗判定を行う
-            if (Judgement())
-            {
-                //終了処理
-                GameFinish();
-                while (!Input.anyKeyDown) { flgBattle = 2; } //キー入力待ち
+        ////ユニットマネージャに指定陣営で行動可能のユニットがいるか確認依頼
+        //if (!unitManager.CanMoveUnit(playerList[currentPlayerNo]))
+        //{
+        //    //毎ターン勝敗判定を行う
+        //    if (Judgement())
+        //    {
+        //        //終了処理
+        //        GameFinish();
+        //        while (!Input.anyKeyDown) { flgBattle = 2; } //キー入力待ち
 
-            } else
-            {
-                //動かせるユニットがいなければターン権限を次のプレイヤーに進める
-                currentPlayerNo++;
-                if (currentPlayerNo > playerList.Count)
-                {
-                    currentPlayerNo = 0;
-                    //ターン数をカウントアップ
-                    turnCnt++;
-                }
+        //    } else
+        //    {
+        //        //動かせるユニットがいなければターン権限を次のプレイヤーに進める
+        //        currentPlayerNo++;
+        //        if (currentPlayerNo > playerList.Count)
+        //        {
+        //            currentPlayerNo = 0;
+        //            //ターン数をカウントアップ
+        //            turnCnt++;
+        //        }
 
-            }
-        }
+        //    }
+        //}
     }
 
     //未使用
@@ -200,6 +196,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     /// <summary>
     /// キャラクター移動処理
+    /// 3/19 shiro UnitManagerへ移動
     /// </summary>
     public void characterMove()
     {
@@ -213,22 +210,5 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         menuManager.UpdateMenuStatus(GetCurrentUnit());
         //menu.transform.FindChild("Child").gameObject;
-    }
-
-
-    /// <summary>
-    /// メニューのOn/Offを制御する
-    /// </summary>
-    public void menuOnOff(bool isOn)
-    {
-        menu.SetActive(isOn);
-    }
-
-    /// <summary>
-    /// コマンドのOn/Offを制御する
-    /// </summary>
-    public void commandOnOff(bool isOn)
-    {
-        command.SetActive(isOn);
     }
 }
