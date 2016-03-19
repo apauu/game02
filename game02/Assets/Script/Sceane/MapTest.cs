@@ -15,7 +15,7 @@ public class MapTest : MonoBehaviour {
     void Start ()
     {
         // マップを作成
-        MapContoroller mapcon = this.GetComponent<MapContoroller>();
+        MapController mapcon = this.GetComponent<MapController>();
 
         mapcon.prefMap = prefMap;
         mapcon.prefPlaneTile = prefPlaneTile;

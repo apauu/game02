@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class EnemyAI : AActor,IActor {
 
     //生成時にオーナーとコントローラを設定
-    public EnemyAI(GameManager owner, UnitManager unitManager, MapContoroller mapCon, UnitController unitCon, MenuManager menuManager)
+    public EnemyAI(GameManager owner, UnitManager unitManager, MapController mapCon, UnitController unitCon, MenuManager menuManager)
     {
         this.init(owner, unitManager, mapCon, unitCon, menuManager);
     }

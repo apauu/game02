@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class UnitManager : SingletonMonoBehaviour<UnitManager>{
 
-    MapContoroller mapcon;
+    MapController mapcon;
     private  int sequenceCharacterNumber = 0;
     private GameObject unitObj;
     public Unit currentSelectUnit { get;  private set; }
@@ -15,7 +15,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
     List<UnitController> uniconList = new List<UnitController>();
 
     //初期化
-    public UnitManager(MapContoroller mapcon)
+    public UnitManager(MapController mapcon)
     {
         this.mapcon = mapcon;
     }
@@ -76,7 +76,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
     {
 
         //配置場所のチェック
-        //MapContoroller mapcon = new MapContoroller(); //MapContorollerはマネージャより取得する
+        //MapController mapcon = new MapController(); //MapControllerはマネージャより取得する
 
         //if (mapcon.CanEnter(x,y)
         //    || UnitManager.CheckPosition(gamePosition))

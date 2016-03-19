@@ -5,7 +5,7 @@ using System.Collections.Generic;
 /// <summary>
 /// Tileクラスを生成・管理するクラス
 /// </summary>
-public class MapContoroller :MonoBehaviour{
+public class MapController :MonoBehaviour{
 
     GameObject myMap;
     //Dictionary<int, Map> mapList;

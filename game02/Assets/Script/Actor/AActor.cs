@@ -15,11 +15,11 @@ public abstract class AActor : IActor
     protected MenuManager menuManager;
 
     //指示できるコントローラー
-    protected MapContoroller mapCon;
+    protected MapController mapCon;
     protected UnitController unitCon;
 
     //生成時にオーナーとコントローラを設定
-    protected void init(GameManager owner, UnitManager unitManager, MapContoroller mapCon, UnitController unitCon, MenuManager manuManager)
+    protected void init(GameManager owner, UnitManager unitManager, MapController mapCon, UnitController unitCon, MenuManager manuManager)
     {
         this.owner = owner;
         this.unitManager = unitManager;

@@ -4,7 +4,7 @@ using System.Collections;
 public class Player : AActor, IActor
 {
     //生成時にオーナーとコントローラを設定
-    public Player(GameManager owner, UnitManager unitManager, MapContoroller mapCon, UnitController unitCon, MenuManager menuManager)
+    public Player(GameManager owner, UnitManager unitManager, MapController mapCon, UnitController unitCon, MenuManager menuManager)
     {
         this.init(owner,unitManager, mapCon, unitCon, menuManager);
     }

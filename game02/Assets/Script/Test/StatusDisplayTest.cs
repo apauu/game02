@@ -5,7 +5,7 @@ public class StatusDisplayTest : SingletonMonoBehaviour<StatusDisplayTest>
 {
 
     //クラスインスタンス
-    MapContoroller mapcon;
+    MapController mapcon;
     UnitManager unitManager;
     MenuManager menuManager;
     Player player;

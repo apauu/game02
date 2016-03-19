@@ -25,7 +25,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private GameObject characterCommandCanvasPrefab;
 
     //クラスインスタンス
-    MapContoroller mapCon;
+    MapController mapCon;
     UnitController unitCon;
     UnitManager unitManager;
     MenuManager menuManager;
@@ -50,7 +50,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         try
         {
             //コントローラー生成
-            mapCon = new MapContoroller();
+            mapCon = new MapController();
             unitCon = new UnitController();
             //ユニットマネージャー生成
             unitManager = new UnitManager(mapCon);
