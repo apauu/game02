@@ -62,7 +62,9 @@ public class Skill
     /// <param name="skillId"></param>
     public Skill()
     {
-
+        //TODO:暫定値設定
+        power = 1.0f;
+        hit = 1.0f;
     }
 
 }

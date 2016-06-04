@@ -6,13 +6,10 @@ using System.Collections;
 /// <summary>
 /// キャラクターコマンドメニューのボタン押下に使用するクラス
 /// </summary>
-public class characterCommandButton : MonoBehaviour {
+public class CharacterCommandButton : MonoBehaviour {
 
     //private propaties
-    private Text characterLevelText;
     private MenuManager menuManager;
-
-    //private GameManager gameManager;
 
     // Use this for initialization
     void Start () {
@@ -29,6 +26,7 @@ public class characterCommandButton : MonoBehaviour {
     /// </summary>
     public void OnClick () 
     {
+        Debug.Log("clicked");
         menuManager.CharacterCommandFacade(this.gameObject.name);
     }
 

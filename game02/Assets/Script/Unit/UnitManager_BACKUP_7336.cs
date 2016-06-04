@@ -199,6 +199,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
     }
 
     /// <summary>
+<<<<<<< HEAD
     /// 選択中のユニットを変更する
     /// オブサーバー通知あり
     /// </summary>
@@ -236,7 +237,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
             observer.Update(obj);
     }
     #endregion
-
+=======
     /// 戦闘予測を実施する
     /// </summary>
     /// <param name="selectedUnit">選択キャラクターのユニットクラス</param>
@@ -246,4 +247,5 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
         BattleCalc.BattleCalculation(selectedUnit,enemyUnit,new Skill());
     }
 
+>>>>>>> 71aa5aa7ea85926f960aa3daff44607ab4096b7a
 }
