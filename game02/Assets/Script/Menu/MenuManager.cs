@@ -10,10 +10,11 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
 {
 
     //private propaties
+
     /// <summary>
-    /// ゲームマネージャー.
+    /// ユニットマネージャー.
     /// </summary>
-    private GameManager gameManager;
+    private UnitManager unitManager;
 
     /// <summary>
     /// キャラクター名テキスト（UI）.
@@ -96,24 +97,9 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
     /// </summary>
     public GameObject characterEquipCanvasPrefab;
 
-    /// <summary>
-    /// インスタンス作成時処理.
-    /// シングルトンのために生成できるインスタンスを１つだけとする
-    /// </summary>
-    public void Awake()
-    {
-        if (this != Instance)
-        {
-            Destroy(this);
-            return;
-        }
-
-        DontDestroyOnLoad(this.gameObject);
-    }
-
     // Use this for initialization
     void Start () {
-        gameManager = GameManager.Instance;
+        unitManager = UnitManager.Instance;
     }
     // Update is called once per frame
     void Update () {    
@@ -275,7 +261,7 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
 
 
     /// <summary>
-    /// コマンド処理　実処理はgameManager以降におまかせ
+    /// コマンド処理の分岐　実処理は別メソッドにて実施
     /// </summary>
     /// <param name="processName"></param>
     public void CharacterCommandFacade(string processName)
@@ -289,6 +275,8 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
                 break;
             //攻撃処理
             case "attackButton":
+                //選択したコマンド（物理攻撃）をセット
+                unitManager.currentSelectAttackKind = SkillConst.SkillKindIsPhysicalAttack;
                 Debug.Log(processName);
                 break;
             //妖術処理

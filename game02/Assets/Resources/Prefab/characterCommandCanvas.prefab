@@ -138,7 +138,7 @@ GameObject:
   - 222: {fileID: 22291602}
   - 114: {fileID: 11416016}
   - 114: {fileID: 11456628}
-  - 114: {fileID: 11424122}
+  - 114: {fileID: 11489332}
   m_Layer: 5
   m_Name: moveButton
   m_TagString: Untagged
@@ -309,17 +309,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u79FB\u52D5"
---- !u!114 &11424122
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 188988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 110a178ec0a01a94abfe03c95e87f295, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11434720
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -565,7 +554,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11424122}
+      - m_Target: {fileID: 11489332}
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -763,6 +752,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11489332
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 188988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 110a178ec0a01a94abfe03c95e87f295, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &22244962
 CanvasRenderer:
   m_ObjectHideFlags: 1

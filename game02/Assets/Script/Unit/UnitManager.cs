@@ -7,6 +7,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
     MapController mapcon;
     private  int sequenceCharacterNumber = 0;
     private GameObject unitObj;
+    public int currentSelectAttackKind { get; set; }
     public Unit currentSelectUnit { get;  private set; }
     public Unit selectEnemyUnit { get; set; }
 
@@ -202,4 +203,15 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
 
         currentSelectUnit = unit;
     }
+
+    /// <summary>
+    /// 戦闘予測を実施する
+    /// </summary>
+    /// <param name="selectedUnit">選択キャラクターのユニットクラス</param>
+    /// <param name="enemyUnit">敵キャラクターのユニットクラス</param>
+    public void PreBattle(Unit selectedUnit,Unit enemyUnit)
+    {
+        BattleCalc.BattleCalculation(selectedUnit,enemyUnit,new Skill());
+    }
+
 }

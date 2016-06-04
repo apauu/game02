@@ -65,7 +65,7 @@ public static class BattleCalc{
     /// <param name="selectUnit"></param>
     /// <param name="enemyUnit"></param>
     /// <param name="selectSkill"></param>
-    static void BattleCalculation(Unit selectUnit,Unit enemyUnit,Skill selectSkill)
+    public static void BattleCalculation(Unit selectUnit,Unit enemyUnit,Skill selectSkill)
     {
 
         switch (selectSkill.attribute)
