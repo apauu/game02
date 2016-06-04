@@ -243,4 +243,20 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
     {
         command.SetActive(isOn);
     }
+
+    /// <summary>
+    /// メニューのOn/Offを制御する(反転)
+    /// </summary>
+    public void menuOnOff()
+    {
+        menu.SetActive(!menu.activeSelf);
+    }
+
+    /// <summary>
+    /// コマンドのOn/Offを制御する(反転)
+    /// </summary>
+    public void commandOnOff()
+    {
+        command.SetActive(!command.activeSelf);
+    }
 }

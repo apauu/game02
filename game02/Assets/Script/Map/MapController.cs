@@ -11,6 +11,7 @@ public class MapController :MonoBehaviour{
     //Dictionary<int, Map> mapList;
     public GameObject prefMap { get; set; }
     public GameObject prefPlaneTile { get; set; }
+    public UnitManager um { get; set; }
 
     /// <summary>
     /// テスト用マップ生成メソッド
@@ -48,7 +49,7 @@ public class MapController :MonoBehaviour{
             myMap = obj;
 
             //タイルの二次元配列を作成
-            List<List<GameObject>> tiles = createTiles(tileIDArray);
+            List<List<GameObject>> tiles = CreateTiles(tileIDArray);
             //マップクラスに配列を格納
             Map map = obj.GetComponent<Map>();
             map.init(mapID, tiles);
@@ -133,8 +134,12 @@ public class MapController :MonoBehaviour{
 
     }
 
-    //タイルIDよりタイルクラスの二次元配列を作成
-    private List<List<GameObject>>  createTiles(int[][] tileIDArray)
+    /// <summary>
+    /// タイルID配列よりタイルの実体を生成する
+    /// </summary>
+    /// <param name="tileIDArray"></param>
+    /// <returns></returns>
+    private List<List<GameObject>>  CreateTiles(int[][] tileIDArray)
     {
         //【tileIDArray内容未使用】
         List<List<GameObject>> tiles = new List<List<GameObject>>();
@@ -146,12 +151,26 @@ public class MapController :MonoBehaviour{
             {
                 GameObject obj = Instantiate(prefPlaneTile, new Vector3(x,MapConst.BaseY,y), Quaternion.identity) as GameObject;
                 //タイル毎に個別の値（位置情報等）を持たせたい場合はここで設定する
-                //Tile t = obj.GetComponent<Tile>();
+                Tile t = obj.GetComponent<Tile>();
                 obj.transform.parent = myMap.transform;
                 tiles[x].Add(obj);
+
+                //タイルクリック用にコリダーとコールバック関数を設定
+                obj.AddComponent<BoxCollider>();
+                t.callbackOnMouseDown = onClickUnit;
+
             }
         }
 
         return tiles;
-    } 
+    }
+
+    /// <summary>
+    /// タイルクリック時のコールバック関数
+    /// </summary>
+    public void onClickUnit()
+    {
+        //ユニットマネージャへクリック処理を渡す
+        //um.DoCommand();
+    }
 }

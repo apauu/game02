@@ -5,6 +5,7 @@
 /// </summary>
 public class Tile :MonoBehaviour{
 
+    #region フィールド変数
     public int tileID { get; set; }
     //画像ファイル
     public string texture { get; set; }
@@ -36,6 +37,14 @@ public class Tile :MonoBehaviour{
 
     //ユニットが通る際の追加防御力（砦等）
     public int defensiveForce { get; set; }
+
+    #endregion
+
+    /// <summary>
+    /// デリゲート用
+    /// </summary>
+    public delegate void DelegateFunc();
+    public DelegateFunc callbackOnMouseDown = null;
 
     //通常のタイル
     public Tile(
@@ -102,5 +111,13 @@ public class Tile :MonoBehaviour{
         this.canEnter = template.canEnter;
         this.movementForce = template.movementForce;
         this.defensiveForce = template.defensiveForce;
+    }
+
+    /// <summary>
+    /// タイルクリック時のデリゲートイベント
+    /// </summary>
+    void OnMouseDown()
+    {
+        if (callbackOnMouseDown != null) callbackOnMouseDown();
     }
 }

@@ -12,6 +12,12 @@ public class UnitController : MonoBehaviour {
     /// </summary>
     private Unit individualUnit;
 
+    /// <summary>
+    /// デリゲート用
+    /// </summary>
+    public delegate void DelegateFunc();
+    public DelegateFunc callbackOnMouseDown = null;
+
     // Use this for initialization
     void Start () {
 
@@ -349,5 +355,13 @@ public class UnitController : MonoBehaviour {
 
 
         return battlePreResults;
-    } 
+    }
+
+    /// <summary>
+    /// ユニットクリック時のデリゲートイベント
+    /// </summary>
+    void OnMouseDown()
+    {
+        if (callbackOnMouseDown != null) callbackOnMouseDown();
+    }
 }

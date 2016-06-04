@@ -26,6 +26,19 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
     }
 
     //ユニット生成処理
+    //陣営設定あり
+    public GameObject GenerateUnit(GameObject prefUnit, int ally, int x, int y)
+    {
+        GenerateUnit(prefUnit);
+        currentSelectUnit.ally = ally;
+        PlaceUnit(unitObj, x , y);
+        unitObj.AddComponent<BoxCollider>();
+
+        return unitObj;
+
+    }
+
+    //ユニット生成処理
     //ユニットのステータス初期化等を踏まえ、Generatorクラスに移行予定
     public GameObject GenerateUnit(GameObject prefUnit)
     {
@@ -42,7 +55,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
         //生成したユニットを配置する
         //暫定的に位置[5,5]に配置する
         //PlaceUnit(unitObj, 5, 5);
-        
+
         return unitObj;
 
     }
