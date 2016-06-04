@@ -12,12 +12,6 @@ public class UnitController : MonoBehaviour {
     /// </summary>
     private Unit individualUnit;
 
-    /// <summary>
-    /// デリゲート用
-    /// </summary>
-    public delegate void DelegateFunc();
-    public DelegateFunc callbackOnMouseDown = null;
-
     // Use this for initialization
     void Start () {
 
@@ -64,7 +58,7 @@ public class UnitController : MonoBehaviour {
         return individualUnit;
     }
 
-
+    #region 経験値関連
     /// <summary>
     /// 経験値を与える
     /// レベルアップ時はレベルアップ処理を呼び出す
@@ -112,7 +106,7 @@ public class UnitController : MonoBehaviour {
         //TODO:未実装
 
     }
-
+    #endregion
 
     /// <summary>
     /// 武器を変更する
@@ -126,6 +120,9 @@ public class UnitController : MonoBehaviour {
 
         individualUnit.weapon = weapon;
     }
+
+
+    #region 保持データの更新
 
     /// <summary>
     /// 基本HPの更新
@@ -207,7 +204,9 @@ public class UnitController : MonoBehaviour {
     {
 
     }
+    #endregion
 
+    #region 移動
     /// <summary>
     /// ユニットを指定位置に移動させる。未実装
     /// </summary>
@@ -231,6 +230,9 @@ public class UnitController : MonoBehaviour {
             mobi--;
         }
     }
+    #endregion
+
+    #region ユニット対象行動
 
     public bool CanTargetSupport(Unit myUnit, Unit targetUnit)
     {
@@ -241,7 +243,6 @@ public class UnitController : MonoBehaviour {
     {
         return CanTarget(myUnit, targetUnit, true);
     }
-
     /// <summary>
     /// 行動範囲に対象がいるかチェック
     /// </summary>
@@ -356,6 +357,14 @@ public class UnitController : MonoBehaviour {
 
         return battlePreResults;
     }
+    #endregion
+
+    #region　ユニットクリック時デリゲート
+    /// <summary>
+    /// デリゲート用
+    /// </summary>
+    public delegate void DelegateFunc();
+    public DelegateFunc callbackOnMouseDown = null;
 
     /// <summary>
     /// ユニットクリック時のデリゲートイベント
@@ -363,5 +372,10 @@ public class UnitController : MonoBehaviour {
     void OnMouseDown()
     {
         if (callbackOnMouseDown != null) callbackOnMouseDown();
+        
+        //ユニットマネージャの選択中ユニットを変更する
+        UnitManager um = UnitManager.Instance;
+        um.SetCurrentSelectUnit(this.gameObject);
     }
+    #endregion
 }

@@ -9,6 +9,7 @@ using System.Collections;
 public class MenuManager : SingletonMonoBehaviour<MenuManager>
 {
 
+    #region フィールド変数
     //private propaties
     /// <summary>
     /// ゲームマネージャー.
@@ -95,6 +96,7 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
     /// 装備リストプレハブ.
     /// </summary>
     public GameObject characterEquipCanvasPrefab;
+    #endregion
 
     /// <summary>
     /// インスタンス作成時処理.

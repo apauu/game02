@@ -1,31 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public abstract class AActor : IActor
+public abstract class AActor : SingletonMonoBehaviour<AActor>, IActor
 {
     public int cost { get; set; }
     public int ally { get; set; }
-    public List<Unit> unitList { get; set; }
+    public List<UnitController> unitList { get; set; }
 
-    //自身のオーナー（管理クラス）
-    protected GameManager owner;
-    //ユニット管理クラス
-    protected UnitManager unitManager;
-    //メニューマネージャー
-    protected MenuManager menuManager;
-
-    //指示できるコントローラー
-    protected MapController mapCon;
-    protected UnitController unitCon;
-
-    //生成時にオーナーとコントローラを設定
-    protected void init(GameManager owner, UnitManager unitManager, MapController mapCon, UnitController unitCon, MenuManager manuManager)
+    protected GameManager gm;
+    protected MenuManager mm;
+    protected MapController mc;
+    protected UnitManager um;
+    
+    protected void init()
     {
-        this.owner = owner;
-        this.unitManager = unitManager;
-        this.mapCon = mapCon;
-        this.unitCon = unitCon;
-        this.menuManager = menuManager;
     }
     
     public void useCost(int value)

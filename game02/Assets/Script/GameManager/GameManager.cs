@@ -32,43 +32,31 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     Player player;
     EnemyAI enemy;
 
-    public void Awake()
-    {
-        if (this != Instance)
-        {
-            Destroy(this);
-            return;
-        }
-
-        DontDestroyOnLoad(this.gameObject);
-    }
-
 
     // Use this for initialization
     void Start ()
     {
         try
         {
-            //コントローラー生成
-            mapCon = new MapController();
-            unitCon = new UnitController();
-            //ユニットマネージャー生成
-            unitManager = new UnitManager(mapCon);
-
-            //メニューコントローラー生成
+            //シングルトンインスタンスの取得
             menuManager = MenuManager.Instance;
-            //menuManager.Init();
+            mapCon = MapController.Instance;
+            unitManager = UnitManager.Instance;
+            //unitCon = new UnitController();;
+            player = (Player) Player.Instance;
+            enemy = (EnemyAI) EnemyAI.Instance;
 
-            //メニュー表示用
-            //menuManager.GenerateMenu();
+            //初期化処理
+            //メニュー生成
+            menuManager.GenerateMenu();
+            //Init処理
+            menuManager.Init();
 
             //マップ、プレイヤーのオブジェクトを生成する
-            //mapCon.GenerateMap(MapConst.Map1);
-            player = new Player(this, unitManager, mapCon, unitCon, menuManager);
-            enemy = new EnemyAI(this, unitManager, mapCon, unitCon, menuManager);
+            //mapCon.GenerateMap(MapConst.Map1)
 
             //テスト用マップ生成
-            mapCon.GenerateMapTest(MapConst.Map1);
+            mapCon.GenerateMap(MapConst.Map1);
 
             //キャラクターを生成する
             //unitManager.GenerateAactorUnits(player);

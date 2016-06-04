@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class UnitManager : SingletonMonoBehaviour<UnitManager>{
 
-    MapController mapcon;
     private  int sequenceCharacterNumber = 0;
     private GameObject unitObj;
     public Unit currentSelectUnit { get;  private set; }
@@ -14,12 +13,6 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
     List<Unit> unitList;
     //マップ上の全ユニットリスト
     List<UnitController> uniconList = new List<UnitController>();
-
-    //初期化
-    public UnitManager(MapController mapcon)
-    {
-        this.mapcon = mapcon;
-    }
 
     //初期化
     public UnitManager()
@@ -102,6 +95,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
         //}
 
         //移動先のタイル位置を取得する
+        MapController mapcon = MapController.Instance;
         Vector3 rpos = mapcon.GetRealPosition(x, z);//タイルの中央位置
 
         //ユニットの実際の位置を設定する
@@ -202,4 +196,43 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
 
         currentSelectUnit = unit;
     }
+
+    /// <summary>
+    /// 選択中のユニットを変更する
+    /// オブサーバー通知あり
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <returns></returns>
+    public GameObject SetCurrentSelectUnit(GameObject unitObj)
+    {
+        this.unitObj = unitObj;
+        NotifyObservers(this.unitObj);
+
+        return unitObj;
+    }
+
+    #region observer用
+
+    private ArrayList observers = new ArrayList();
+
+    // Observerを追加します。
+    public void AddObserver(IObserver observer)
+    {
+        observers.Add(observer);
+    }
+
+    // Observerを削除します。
+    public void DeleteObserver(IObserver observer)
+    {
+        observers.Remove(observer);
+    }
+    /// <summary>
+    /// Observerへ通知します。
+    /// </summary>
+    public void NotifyObservers(GameObject obj)
+    {
+        foreach (IObserver observer in observers)
+            observer.Update(obj);
+    }
+    #endregion
 }

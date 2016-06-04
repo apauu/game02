@@ -4,10 +4,9 @@ using System.Collections.Generic;
 
 public class Map : MonoBehaviour
 {
-
+    //ID
     public int mapID { get; set; }
-
-    //タイルの二次元リストを持つ
+    //タイル（実体）の二次元リスト
     public List<List<GameObject>> tiles { get; set; }
 
     public void init (int mapID, List<List<GameObject>> tiles)

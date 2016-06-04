@@ -4,24 +4,27 @@ using System.Collections.Generic;
 public class EnemyAI : AActor,IActor {
 
     //生成時にオーナーとコントローラを設定
-    public EnemyAI(GameManager owner, UnitManager unitManager, MapController mapCon, UnitController unitCon, MenuManager menuManager)
+    public EnemyAI()
     {
-        this.init(owner, unitManager, mapCon, unitCon, menuManager);
+        gm = GameManager.Instance;
+        mm = MenuManager.Instance;
+        mc = MapController.Instance;
+        um = UnitManager.Instance;
     }
 
     public void Update()
     {
         //ユニットリストの上から順に行動
-        foreach (Unit u in unitList)
+        foreach (UnitController uc in unitList)
         {
             //ユニットから一番近いユニットの位置を取得
-            Unit nearestEnemy = unitManager.getNearestEnemy(u);
+            Unit nearestEnemy = um.getNearestEnemy(u);
             Vector3 v = nearestEnemy.position;
 
             //ユニットを指定位置の近くまで移動させる
-            unitCon.Move(u, v);
+            uc.Move(u, v);
             //攻撃可能なら攻撃させる
-            if (unitCon.CanTargetAttack(u, nearestEnemy))
+            if (uc.CanTargetAttack(u, nearestEnemy))
             {
                 unitCon.Attack(u, nearestEnemy, 0);
             }

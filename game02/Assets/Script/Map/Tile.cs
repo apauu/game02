@@ -6,46 +6,33 @@
 public class Tile :MonoBehaviour{
 
     #region フィールド変数
+    //ID
     public int tileID { get; set; }
     //画像ファイル
     public string texture { get; set; }
-
     //ゲーム上のX,Y座標（Unity座標上の値でない）
     public Vector2 location { get; set; }
-
     //Unity上の3次元座標
     public Vector3 realLocation
     {
         get { return transform.position; }
         set { transform.position = value; }
     }
-
     //高さ。マイナス有り
     public int hight { get; set; }
-
     //勢力情報
     public int belongAlly { get; set; }
-
     //true：拠点　false：その他
     public bool isBase { get; set; }
-
     //true：通行可　false：通行不可
     public bool canEnter { get; set; }
-
     //ユニットが通る際の追加移動力（沼地等）：０（平地）～－１０（進入不可）
     public int movementForce { get; set; }
-
     //ユニットが通る際の追加防御力（砦等）
     public int defensiveForce { get; set; }
-
     #endregion
 
-    /// <summary>
-    /// デリゲート用
-    /// </summary>
-    public delegate void DelegateFunc();
-    public DelegateFunc callbackOnMouseDown = null;
-
+    #region コンストラクタ
     //通常のタイル
     public Tile(
         int tileID,
@@ -112,12 +99,18 @@ public class Tile :MonoBehaviour{
         this.movementForce = template.movementForce;
         this.defensiveForce = template.defensiveForce;
     }
+    #endregion
+
+    #region タイルクリック時のデリゲート関数
+    public delegate void DelegateFunc(Tile t);
+    public DelegateFunc callbackOnMouseDown = null;
 
     /// <summary>
     /// タイルクリック時のデリゲートイベント
     /// </summary>
     void OnMouseDown()
     {
-        if (callbackOnMouseDown != null) callbackOnMouseDown();
+        if (callbackOnMouseDown != null) callbackOnMouseDown(this);
     }
+    #endregion
 }

@@ -13,14 +13,14 @@ public class MapTest : MonoBehaviour {
     public GameObject prefLayerSquare;
     UnitManager um;
     MenuManager menuManager;
-    //CameraControl camecon;
+    CameraControl camecon;
 
     // Use this for initialization
     void Start ()
     {
         //カメラ追従スクリプトを追加
-        //GameObject cameraObj = GameObject.Find("Main Camera"); ;
-        //camecon = cameraObj.AddComponent<CameraControl>();
+        GameObject cameraObj = GameObject.Find("Main Camera"); ;
+        camecon = cameraObj.AddComponent<CameraControl>();
 
         //メニューコントローラー生成
         menuManager = MenuManager.Instance;
@@ -32,18 +32,22 @@ public class MapTest : MonoBehaviour {
         //メニューを非表示に設定
         menuManager.menuOnOff(false);
         menuManager.commandOnOff(false);
+
         // マップコントローラーを作成
-        MapController mapcon = this.GetComponent<MapController>();
+        MapController mapcon = MapController.Instance;
 
         mapcon.prefMap = prefMap;
         mapcon.prefPlaneTile = prefPlaneTile;
         mapcon.GenerateMap(MapConst.Map1);
 
         // ユニットを作成
-        um = new UnitManager(mapcon);
+        um = UnitManager.Instance;
         GameObject mikata = um.GenerateUnit(prefUnit, 1, 5 , 5); //味方ゴブリン
         GameObject teki = um.GenerateUnit(prefUnit, 2, 15, 15); //敵ゴブリン
-        menuManager.UpdateMenuStatus(um.currentSelectUnit);
+        menuManager.UpdateCharacterMenuStatus(um.currentSelectUnit);
+
+        //ユニットマネージャーにオブサーバー追加
+        um.AddObserver(camecon);
 
         //味方ゴブリンにクリック動作を設定
         UnitController unicon = mikata.GetComponent<UnitController>();

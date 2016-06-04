@@ -3,21 +3,18 @@ using System;
 using System.Collections.Generic;
 
 /// <summary>
-/// Tileクラスを生成・管理するクラス
+/// Map,Tileクラスを生成・管理するクラス
+/// Singletonクラス
 /// </summary>
-public class MapController :MonoBehaviour{
+public class MapController : SingletonMonoBehaviour<MapController>
+{
 
     GameObject myMap;
     //Dictionary<int, Map> mapList;
     public GameObject prefMap { get; set; }
     public GameObject prefPlaneTile { get; set; }
-    public UnitManager um { get; set; }
 
-    /// <summary>
-    /// テスト用マップ生成メソッド
-    /// </summary>
-    /// <returns></returns>
-    public bool GenerateMapTest(int mapID)
+    public MapController()
     {
         GameObject mapPref = new GameObject();
         mapPref.name = MapConst.MapName1;
@@ -25,9 +22,6 @@ public class MapController :MonoBehaviour{
         prefMap = mapPref;
         prefPlaneTile = GetResource.GetGameObjectFromResource(GameObjectNameConst.TexturePath + GameObjectNameConst.PlaneTilePrefab);
 
-        GenerateMap(mapID);
-
-        return true;
     }
 
     /// <summary>
@@ -43,15 +37,15 @@ public class MapController :MonoBehaviour{
             */
             int[][] tileIDArray;
             tileIDArray = loadMapFile(mapID);
-            
-            //マップオブジェクトを作成
-            GameObject obj = Instantiate(prefMap, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
-            myMap = obj;
 
-            //タイルの二次元配列を作成
+            //マップオブジェクト(空オブジェクト)を作成
+            myMap = Instantiate(prefMap, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+
+            //タイルの実体を作成
             List<List<GameObject>> tiles = CreateTiles(tileIDArray);
+
             //マップクラスに配列を格納
-            Map map = obj.GetComponent<Map>();
+            Map map = myMap.GetComponent<Map>();
             map.init(mapID, tiles);
 
             //マップリストにマップを登録
@@ -103,7 +97,26 @@ public class MapController :MonoBehaviour{
         return myMap.GetComponent<Map>().GetRealPosition(x, y);
     }
 
+    /// <summary>
+    /// タイルクリック時のコールバック関数
+    /// </summary>
+    /// <param name="t">クリックされたマスのタイルクラス</param>
+    public void onClickUnit(Tile t)
+    {
+        //ユニットマネージャへクリック処理を渡す
+        //UnitManager um = UnitManager.Instance;
+        //um.DoCommand(t);
+    }
 
+
+    #region マップ生成用独自メソッド
+
+    #region マップIDよりマップ情報を読み込む
+    /// <summary>
+    /// マップIDよりマップ情報を読み込む
+    /// </summary>
+    /// <param name="mapID"></param>
+    /// <returns></returns>
     private int[][] loadMapFile(int mapID)
     {
         int[][] tileIDArray = null;
@@ -133,7 +146,9 @@ public class MapController :MonoBehaviour{
         return tileIDArray;
 
     }
+    #endregion
 
+    #region タイルID配列よりタイルの実体を生成する
     /// <summary>
     /// タイルID配列よりタイルの実体を生成する
     /// </summary>
@@ -164,13 +179,7 @@ public class MapController :MonoBehaviour{
 
         return tiles;
     }
+    #endregion
 
-    /// <summary>
-    /// タイルクリック時のコールバック関数
-    /// </summary>
-    public void onClickUnit()
-    {
-        //ユニットマネージャへクリック処理を渡す
-        //um.DoCommand();
-    }
+#endregion
 }

@@ -3,17 +3,19 @@ using System.Collections;
 
 public class Player : AActor, IActor
 {
-    //生成時にオーナーとコントローラを設定
-    public Player(GameManager owner, UnitManager unitManager, MapController mapCon, UnitController unitCon, MenuManager menuManager)
+    //生成時にマネージャを設定
+    public Player()
     {
-        this.init(owner,unitManager, mapCon, unitCon, menuManager);
+        gm = GameManager.Instance;
+        mm = MenuManager.Instance;
+        mc = MapController.Instance;
+        um = UnitManager.Instance;
+
     }
 
     //ゲーム開始前の準備動作
     public bool PreStart()
     {
-        
-
         return true;
     }
 
@@ -35,10 +37,10 @@ public class Player : AActor, IActor
             {
                 // rayが当たったオブジェクトの名前を取得
                 GameObject unitObj = hit.collider.gameObject;
-                unitManager.selectUnitTest(unitObj);
+                um.selectUnitTest(unitObj);
 
                 //ユニットのメニューを表示
-                menuManager.commandOnOff(true);
+                mm.commandOnOff(true);
 
                 Debug.Log(unitObj.name + " on click!");
             }
