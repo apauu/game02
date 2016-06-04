@@ -25,7 +25,7 @@ public static class GameObjectNameConst
     /// <summary>
     /// キャラクター「ゴブリン」プレハブ名称
     /// </summary>
-    public const string UnitPrefab = "Goblin";
+    public const string UnitPrefab = "GOBLIN";
     /// <summary>
     /// 平地用タイルプレハブ名称
     /// </summary>

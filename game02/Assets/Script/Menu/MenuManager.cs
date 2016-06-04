@@ -152,6 +152,7 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
         menu.SetActive(true);
         //コマンド
         command.SetActive(true);
+
     }
 
     /// <summary>

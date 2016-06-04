@@ -16,11 +16,6 @@ public class MapController : SingletonMonoBehaviour<MapController>
 
     public MapController()
     {
-        GameObject mapPref = new GameObject();
-        mapPref.name = MapConst.MapName1;
-        mapPref.AddComponent<Map>();
-        prefMap = mapPref;
-        prefPlaneTile = GetResource.GetGameObjectFromResource(GameObjectNameConst.TexturePath + GameObjectNameConst.PlaneTilePrefab);
 
     }
 
@@ -31,6 +26,11 @@ public class MapController : SingletonMonoBehaviour<MapController>
     {
         try
         {
+            prefMap = new GameObject();
+            prefMap.name = MapConst.MapName1;
+            prefMap.AddComponent<Map>();
+            prefPlaneTile = GetResource.GetGameObjectFromResource(GameObjectNameConst.TexturePath + GameObjectNameConst.PlaneTilePrefab);
+
             /*
             マップIDより取得したマップファイルを読み込み、
             タイルID配列を取得する
@@ -181,5 +181,5 @@ public class MapController : SingletonMonoBehaviour<MapController>
     }
     #endregion
 
-#endregion
+    #endregion
 }

@@ -3,15 +3,6 @@ using System.Collections;
 
 public class Player : AActor, IActor
 {
-    //生成時にマネージャを設定
-    public Player()
-    {
-        gm = GameManager.Instance;
-        mm = MenuManager.Instance;
-        mc = MapController.Instance;
-        um = UnitManager.Instance;
-
-    }
 
     //ゲーム開始前の準備動作
     public bool PreStart()
@@ -45,11 +36,6 @@ public class Player : AActor, IActor
                 Debug.Log(unitObj.name + " on click!");
             }
         }
-    }
-
-    void init()
-    {
-
     }
 
     void TurnStart()

@@ -13,13 +13,9 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
     //マップ上の全ユニットリスト
     List<Unit> unitList;
     //マップ上の全ユニットリスト
-    List<UnitController> uniconList = new List<UnitController>();
+    //List<UnitController> uniconList = new List<UnitController>();
 
-    //初期化
-    public UnitManager()
-    {
-    }
-
+    #region ユニット生成（Generatorに移行予定）
     //ユニット生成処理
     //陣営設定あり
     public GameObject GenerateUnit(GameObject prefUnit, int ally, int x, int y)
@@ -41,7 +37,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
         //GameObject prefUnit = null;
         unitObj = (GameObject)Instantiate(prefUnit, new Vector3(0, 0, 0), Quaternion.identity);
         unitObj.AddComponent<Unit>();
-        unitObj.AddComponent<UnitController>();
+        //unitObj.AddComponent<UnitController>();
         //Unitの初期化
         //TODO:ユニットIDを取得/設定する仕組みを作ること
         currentSelectUnit = unitObj.GetComponent<Unit>();
@@ -59,10 +55,12 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
     public void GenerateUnitsTest(AActor actor)
     {
         //テスト用ゴブリン生成
-        UnitGenerator ug = new UnitGenerator();
-        GameObject unitObj = GenerateUnit(ug.getTestUnitPrefab(UnitConst.UnitID1));
-        UnitController unicon = unitObj.GetComponent<UnitController>();
-        uniconList.Add(unicon);
+        //UnitGenerator ug = new UnitGenerator();  //MonoBehaviourはnewで作成できない
+        UnitGenerator ug = this.gameObject.AddComponent<UnitGenerator>();
+        GameObject goblinPref = ug.getTestUnitPrefab(UnitConst.UnitID1);
+        GameObject unitObj = GenerateUnit(goblinPref, actor.ally, 5, 5);
+        //UnitController unicon = unitObj.GetComponent<UnitController>();
+        //uniconList.Add(unicon);
 
     }
 
@@ -79,6 +77,9 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
 
     }
 
+    #endregion
+
+    #region ユニット配置
     //生成されたユニットを配置する
     public bool PlaceUnit(GameObject unitObj, int x, int z)
     {
@@ -109,7 +110,10 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
 
         return true;
     }
-    
+    #endregion
+
+    #region　ユニット選択時処理
+
     //指定プレイヤーのユニットで未行動のものがいるか確認
     public bool CanMoveUnit(AActor actor)
     {
@@ -212,6 +216,8 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
         return unitObj;
     }
 
+    #endregion
+
     #region observer用
 
     private ArrayList observers = new ArrayList();
@@ -237,6 +243,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
     }
     #endregion
 
+    #region 戦闘関連
     /// 戦闘予測を実施する
     /// </summary>
     /// <param name="selectedUnit">選択キャラクターのユニットクラス</param>
@@ -245,5 +252,6 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
     {
         BattleCalc.BattleCalculation(selectedUnit,enemyUnit,new Skill());
     }
+    #endregion
 
 }

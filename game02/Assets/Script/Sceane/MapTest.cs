@@ -54,7 +54,7 @@ public class MapTest : MonoBehaviour {
         unicon.callbackOnMouseDown = onClickUnit;
 
         // レイヤーを作成
-        MapLayer ml = new MapLayer();
+        MapLayer ml = this.gameObject.AddComponent<MapLayer>();
 
         ml.initialize(mapcon.GetMap(), prefLayerSquare);
         //ml.ShowMoveLayer(15, 15, 4);
@@ -68,7 +68,6 @@ public class MapTest : MonoBehaviour {
 
     public void onClickUnit()
     {
-        //camecon.SetTargetObject();
         menuManager.commandOnOff();
     }
 }

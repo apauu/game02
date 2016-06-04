@@ -5,7 +5,8 @@ using System.Collections.Generic;
 /// <summary>
 /// 個別のユニットを管理するクラス
 /// </summary>
-public class UnitController : MonoBehaviour {
+public class UnitController : UnitManager
+{
 
     /// <summary>
     /// ユニットクラス
@@ -22,22 +23,22 @@ public class UnitController : MonoBehaviour {
 
     }
 
-    /// <summary>
-    /// コンストラクタ
-    /// </summary>
-    public UnitController()
-    {
-    }
+    ///// <summary>
+    ///// コンストラクタ
+    ///// </summary>
+    //public UnitController()
+    //{
+    //}
 
-    /// <summary>
-    /// コンストラクタ
-    /// シーケンスNo、ユニットIDから初期化処理を行う
-    /// </summary>
-    public UnitController(string sequenceNo,string unitId)
-    {
-        //ユニットの初期化
-        //individualUnit = new Unit(sequenceNo,unitId);
-    }
+    ///// <summary>
+    ///// コンストラクタ
+    ///// シーケンスNo、ユニットIDから初期化処理を行う
+    ///// </summary>
+    //public UnitController(string sequenceNo,string unitId)
+    //{
+    //    //ユニットの初期化
+    //    //individualUnit = new Unit(sequenceNo,unitId);
+    //}
 
 
     /// <summary>
@@ -373,9 +374,9 @@ public class UnitController : MonoBehaviour {
     {
         if (callbackOnMouseDown != null) callbackOnMouseDown();
         
-        //ユニットマネージャの選択中ユニットを変更する
-        UnitManager um = UnitManager.Instance;
-        um.SetCurrentSelectUnit(this.gameObject);
+        ////ユニットマネージャの選択中ユニットを変更する
+        //UnitManager um = UnitManager.Instance;
+        SetCurrentSelectUnit(this.gameObject);
     }
     #endregion
 }

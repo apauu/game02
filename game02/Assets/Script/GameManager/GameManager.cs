@@ -20,13 +20,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     // private プロパティ
     private GameObject menu;
     private GameObject menuCanvasPrefab;
-    // private プロパティ
     private GameObject command;
     private GameObject characterCommandCanvasPrefab;
 
     //クラスインスタンス
     MapController mapCon;
-    UnitController unitCon;
+    //UnitController unitCon;
     UnitManager unitManager;
     MenuManager menuManager;
     Player player;
@@ -38,25 +37,34 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         try
         {
-            //シングルトンインスタンスの取得
+            //インスタンスの取得
             menuManager = MenuManager.Instance;
             mapCon = MapController.Instance;
             unitManager = UnitManager.Instance;
             //unitCon = new UnitController();;
-            player = (Player) Player.Instance;
-            enemy = (EnemyAI) EnemyAI.Instance;
+            player = new Player();
+            enemy = new EnemyAI();
 
-            //初期化処理
+            /***************************************
+            初期化処理
+            ****************************************/
+            //カメラ追従スクリプトを追加
+            GameObject camera = GameObject.Find("Main Camera"); ;
+            CameraControl camecon = camera.AddComponent<CameraControl>();
+            //ユニットマネージャーにオブサーバー追加
+            unitManager.AddObserver(camecon);
+
             //メニュー生成
             menuManager.GenerateMenu();
             //Init処理
             menuManager.Init();
 
-            //マップ、プレイヤーのオブジェクトを生成する
-            //mapCon.GenerateMap(MapConst.Map1)
-
-            //テスト用マップ生成
+            //マップ生成
             mapCon.GenerateMap(MapConst.Map1);
+
+            //アクター初期化
+            player.Init();
+            enemy.Init();
 
             //キャラクターを生成する
             //unitManager.GenerateAactorUnits(player);
@@ -67,8 +75,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
             //ユニットの初期配置（ユーザ操作前）を設定する
             //↓生成時に配置できれば不要？
-            //DeployUnits(PlayerUnits);
-            //DeployUnits(EnemyUnits);
+            //unitManager.DeployUnits(PlayerUnits);
+            //unitManager.DeployUnits(EnemyUnits);
 
             //初回ターン設定
             currentPlayerNo = 0;
@@ -94,19 +102,20 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         //戦闘中の場合
         if (flgBattle == 1)
         {
-            //プレイヤーターンの場合
             if (currentPlayerNo == 0)
             {
+                //プレイヤーターンの場合
                 player.Update();
             }
-            //敵ターンの場合
             else
             {
+                //敵ターンの場合
                 enemy.Update();
             }
         }
-        //戦闘開始前の場合
-        else if (flgBattle == 0) {
+        else if (flgBattle == 0)
+        {
+            //戦闘開始前の場合
             //プレイヤー側の準備操作が終了したら戦闘開始する
             if (player.PreStart())
             {
