@@ -26,16 +26,55 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
     private Text characterLevelText;
 
     /// <summary>
-    /// キャラクターHPテキスト（UI）.
+    /// キャラクター妖力テキスト（UI）.
     /// </summary>
     private Text characterHPText;
 
     /// <summary>
-    /// キャラクターHPスライダー（UI）.
+    /// キャラクター妖力スライダー（UI）.
     /// </summary>
     private Slider characterHPSlider;
 
-    // private プロパティ
+    /// <summary>
+    /// キャラクター経験値テキスト（UI）.
+    /// </summary>
+    private Text characterExperienceText;
+
+    /// <summary>
+    /// キャラクター経験値スライダー（UI）.
+    /// </summary>
+    private Slider characterExperienceSlider;
+
+    /// <summary>
+    /// エネミー名テキスト（UI）.
+    /// </summary>
+    private Text enemyNameText;
+
+    /// <summary>
+    /// エネミーレベルテキスト（UI）.
+    /// </summary>
+    private Text enemyLevelText;
+
+    /// <summary>
+    /// エネミー妖力テキスト（UI）.
+    /// </summary>
+    private Text enemyHPText;
+
+    /// <summary>
+    /// エネミー妖力スライダー（UI）.
+    /// </summary>
+    private Slider enemyHPSlider;
+
+    /// <summary>
+    /// エネミー経験値テキスト（UI）.
+    /// </summary>
+    private Text enemyExperienceText;
+
+    /// <summary>
+    /// エネミー経験値スライダー（UI）.
+    /// </summary>
+    private Slider enemyExperienceSlider;
+
     /// <summary>
     /// メニューオブジェクト.
     /// </summary>
@@ -76,21 +115,38 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
     void Start () {
         gameManager = GameManager.Instance;
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    // Update is called once per frame
+    void Update () {    
+    }
 
     /// <summary>
     /// メニュー関連オブジェクトの検索.
     /// </summary>
     public void Init ()
     {
+        /* キャラクターオブジェクトの検索 */
+        //キャラクター名オブジェクトを紐づけ
         characterNameText = GameObject.Find(GameObjectNameConst.CharacterNameText).GetComponent<Text>();
+        //キャラクターレベル名オブジェクトを紐づけ
         characterLevelText = GameObject.Find(GameObjectNameConst.CharacterLevelText).GetComponent<Text>();
+        //キャラクター妖力オブジェクトを紐づけ
         characterHPText = GameObject.Find(GameObjectNameConst.CharacterHpText).GetComponent<Text>();
         characterHPSlider = GameObject.Find(GameObjectNameConst.CharacterHpSlider).GetComponent<Slider>();
+        //キャラクター経験値オブジェクトを紐づけ
+        characterExperienceText = GameObject.Find(GameObjectNameConst.CharacterExperienceText).GetComponent<Text>();
+        characterExperienceSlider = GameObject.Find(GameObjectNameConst.CharacterExperienceSlider).GetComponent<Slider>();
+
+        /* エネミーオブジェクトの検索 */
+        //エネミー名オブジェクトを紐づけ
+        enemyNameText = GameObject.Find(GameObjectNameConst.EnemyNameText).GetComponent<Text>();
+        //エネミーレベル名オブジェクトを紐づけ
+        enemyLevelText = GameObject.Find(GameObjectNameConst.EnemyLevelText).GetComponent<Text>();
+        //エネミー妖力オブジェクトを紐づけ
+        enemyHPText = GameObject.Find(GameObjectNameConst.EnemyHpText).GetComponent<Text>();
+        enemyHPSlider = GameObject.Find(GameObjectNameConst.EnemyHpSlider).GetComponent<Slider>();
+        //エネミー経験値オブジェクトを紐づけ
+        enemyExperienceText = GameObject.Find(GameObjectNameConst.EnemyExperienceText).GetComponent<Text>();
+        enemyExperienceSlider = GameObject.Find(GameObjectNameConst.EnemyExperienceSlider).GetComponent<Slider>();
     }
 
     /// <summary>
@@ -111,10 +167,10 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
     }
 
     /// <summary>
-    /// メニューのステータス表示を更新する.
+    /// キャラクターメニューのステータス表示を更新する
     /// </summary>
-    /// <param name="expressUnit"></param>
-    public void UpdateMenuStatus(Unit expressUnit)
+    /// <param name="expressUnit">ユニットクラス</param>
+    public void UpdateCharacterMenuStatus(Unit expressUnit)
     {
         //名前更新
         characterNameText.text = expressUnit.name.ToString();
@@ -126,14 +182,22 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
         characterHPText.text = expressUnit.currentHp.ToString()+"/"+ expressUnit.baseChangeHp.ToString();
 
         //HPスライダー更新
-        UpdateHpSlider(expressUnit);
+        UpdateCharacterHpSlider(expressUnit);
+
+        //経験テキスト更新
+        //TODO:経験値の最大値をどこからか取得する必要あり
+        characterExperienceText.text = expressUnit.exp.ToString() + "/" + expressUnit.exp.ToString();
+
+        //経験スライダー更新
+        UpdateCharacterExpSlider(expressUnit);
 
     }
 
     /// <summary>
-    /// HPスライダーの最大値、現在値を更新する.
+    /// キャラクターHPスライダーの最大値、現在値を更新する
     /// </summary>
-    private void UpdateHpSlider(Unit expressUnit)
+    /// <param name="expressUnit">選択キャラクターのユニットクラス</param>
+    private void UpdateCharacterHpSlider(Unit expressUnit)
     {
         //スライダーの最大値更新
         characterHPSlider.maxValue = expressUnit.baseChangeHp;
@@ -142,7 +206,76 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
     }
 
     /// <summary>
-    /// コマンド処理　実処理はgameManager以降におまかせ.
+    /// キャラクター経験値スライダーの最大値、現在値を更新する
+    /// </summary>
+    /// <param name="expressUnit">選択キャラクターのユニットクラス</param>
+    private void UpdateCharacterExpSlider(Unit expressUnit)
+    {
+        //スライダーの最大値更新
+        //TODO:経験値の最大値をどこからか取得する必要あり
+        characterExperienceSlider.maxValue = (float)expressUnit.exp;
+        //スライダーの現在値更新
+        characterExperienceSlider.value = (float)expressUnit.exp;
+    }
+
+
+    /// <summary>
+    /// エネミーメニューのステータス表示を更新する
+    /// </summary>
+    /// <param name="expressUnit">敵キャラクターのユニットクラス</param>
+    public void UpdateEnemyMenuStatus(Unit expressUnit)
+    {
+        //名前更新
+        enemyNameText.text = expressUnit.name.ToString();
+
+        //レベル更新
+        enemyLevelText.text = expressUnit.lvl.ToString();
+
+        //HPテキスト更新
+        enemyHPText.text = expressUnit.currentHp.ToString() + "/" + expressUnit.baseChangeHp.ToString();
+
+        //HPスライダー更新
+        UpdateEnemyHpSlider(expressUnit);
+
+        //経験テキスト更新
+        //TODO:経験値の最大値をどこからか取得する必要あり
+        enemyExperienceText.text = expressUnit.exp.ToString() + "/" + expressUnit.exp.ToString();
+
+        //経験スライダー更新
+        UpdateEnemyExpSlider(expressUnit);
+
+    }
+
+    /// <summary>
+    /// エネミーHPスライダーの最大値、現在値を更新する
+    /// </summary>
+    /// <param name="expressUnit">敵キャラクターのユニットクラス</param>
+    private void UpdateEnemyHpSlider(Unit expressUnit)
+    {
+        //スライダーの最大値更新
+        enemyHPSlider.maxValue = expressUnit.baseChangeHp;
+        //スライダーの現在値更新
+        enemyHPSlider.value = expressUnit.currentHp;
+    }
+
+    /// <summary>
+    /// エネミー経験値スライダーの最大値、現在値を更新する
+    /// </summary>
+    /// <param name="expressUnit">敵キャラクターのユニットクラス</param>
+    private void UpdateEnemyExpSlider(Unit expressUnit)
+    {
+        //スライダーの最大値更新
+        //TODO:経験値の最大値をどこからか取得する必要あり
+        enemyExperienceSlider.maxValue = (float)expressUnit.exp;
+        //スライダーの現在値更新
+        enemyExperienceSlider.value = (float)expressUnit.exp;
+    }
+
+
+
+
+    /// <summary>
+    /// コマンド処理　実処理はgameManager以降におまかせ
     /// </summary>
     /// <param name="processName"></param>
     public void CharacterCommandFacade(string processName)
@@ -189,7 +322,7 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
     }
 
     /// <summary>
-    /// コマンド処理　実処理はgameManager以降におまかせ.
+    /// コマンド処理　実処理はgameManager以降におまかせ
     /// 仮で固定で３つの装備を選択できるようにする。
     /// </summary>
     /// <param name="processName"></param>

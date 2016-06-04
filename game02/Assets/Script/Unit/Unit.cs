@@ -196,7 +196,7 @@ public class Unit : MonoBehaviour{
         baseMobility = 1;
         currentMobility = baseMobility;
         baseHp = 1;
-        baseChangeHp = 2;
+        baseChangeHp = 100;
         currentHp = baseHp;
         baseAtk = 1;
         currentAtk = baseAtk;

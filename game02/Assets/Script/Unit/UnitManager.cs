@@ -8,6 +8,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
     private  int sequenceCharacterNumber = 0;
     private GameObject unitObj;
     public Unit currentSelectUnit { get;  private set; }
+    public Unit selectEnemyUnit { get; set; }
 
     //マップ上の全ユニットリスト
     List<Unit> unitList;

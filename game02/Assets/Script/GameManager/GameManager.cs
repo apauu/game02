@@ -206,9 +206,18 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     /// <summary>
     /// メニューの画像・キャラクターステータスを変更する
     /// </summary>
-    public void ChangeMenu()
+    public void ChangeCharacterMenu()
     {
-        menuManager.UpdateMenuStatus(GetCurrentUnit());
+        menuManager.UpdateCharacterMenuStatus(GetCurrentUnit());
+        //menu.transform.FindChild("Child").gameObject;
+    }
+
+    /// <summary>
+    /// メニューの画像・キャラクターステータスを変更する
+    /// </summary>
+    public void ChangeEnemyMenu()
+    {
+        //menuManager.UpdateEnemyMenuStatus();
         //menu.transform.FindChild("Child").gameObject;
     }
 }

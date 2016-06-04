@@ -18,6 +18,20 @@ public static class GameObjectNameConst
     /// キャラクター装備キャンバスプレハブ名称.
     /// </summary>
     public const string CharacterEquipCanvasPrefab = "characterEquipCanvas";
+    /// <summary>
+    /// マップ用プレハブ名称
+    /// </summary>
+    public const string MapPrefab = "Map";
+    /// <summary>
+    /// キャラクター「ゴブリン」プレハブ名称
+    /// </summary>
+    public const string UnitPrefab = "Goblin";
+    /// <summary>
+    /// 平地用タイルプレハブ名称
+    /// </summary>
+    public const string PlaneTilePrefab = "Tile";
+
+
 
     /*現在選択されているキャラクター（敵味方両方）用のUIオブジェクト*/
     /// <summary>
@@ -34,13 +48,21 @@ public static class GameObjectNameConst
     /// </summary>
     public const string CharacterLevelText = "characterLevelText";
     /// <summary>
-    /// キャラクター名HPオブジェクト名称.
+    /// キャラクター名妖力オブジェクト名称.
     /// </summary>
     public const string CharacterHpText = "characterHpText";
     /// <summary>
-    /// キャラクター名HPスライダーオブジェクト名称.
+    /// キャラクター名妖力スライダーオブジェクト名称.
     /// </summary>
     public const string CharacterHpSlider = "characterHpSlider";
+    /// <summary>
+    /// キャラクター名経験値オブジェクト名称.
+    /// </summary>
+    public const string CharacterExperienceText = "characterExpText";
+    /// <summary>
+    /// キャラクター名経験値スライダーオブジェクト名称.
+    /// </summary>
+    public const string CharacterExperienceSlider = "characterExpSlider";
 
 
 
@@ -57,23 +79,22 @@ public static class GameObjectNameConst
     /// <summary>
     /// エネミー名レベルオブジェクト名称.
     /// </summary>
-    public const string EnemyLevelText = "characterLevelText";
+    public const string EnemyLevelText = "enemyLevelText";
     /// <summary>
     /// エネミー名HPオブジェクト名称.
     /// </summary>
-    public const string EnemyHpText = "characterHpText";
+    public const string EnemyHpText = "enemyHpText";
     /// <summary>
     /// エネミー名HPスライダーオブジェクト名称.
     /// </summary>
-    public const string EnemyHpSlider = "characterHpSlider";
-
-
-    public const string MapPrefab = "Map";
-    public const string UnitPrefab = "Goblin";
-
+    public const string EnemyHpSlider = "enemyHpSlider";
     /// <summary>
-    /// 平地用タイル
+    /// エネミー名経験値オブジェクト名称.
     /// </summary>
-    public const string PlaneTilePrefab = "Tile";
+    public const string EnemyExperienceText = "enemyExpText";
+    /// <summary>
+    /// エネミー名経験値スライダーオブジェクト名称.
+    /// </summary>
+    public const string EnemyExperienceSlider = "enemyExpSlider";
 
 }
