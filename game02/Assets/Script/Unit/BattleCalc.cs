@@ -189,7 +189,7 @@ public static class BattleCalc{
     /// <summary>
     /// 命中判定.
     /// 
-    /// 1*(100+命中-回避)（％）により計算される
+    /// ランダム値(0.8～1)*1*(100+命中-回避)（％）により計算される
     /// </summary>
     private static void IsHit()
     {
@@ -204,13 +204,14 @@ public static class BattleCalc{
     }
 
     /// <summary>
-    /// 
+    /// 特攻値計算
     /// </summary>
-    /// <param name="selectType"></param>
-    /// <param name="enemyType"></param>
-    /// <returns></returns>
+    /// <param name="selectType">攻撃する側のユニット種別</param>
+    /// <param name="enemyType">攻撃される側のユニット種別</param>
+    /// <returns>特攻値を返す。特攻の場合1.2、それ以外は1</returns>
     private static double TypeJudge(int selectType,int enemyType)
     {
+        //TODO:特攻の判定処理を追加こと
         return 1.2;
     }
 }

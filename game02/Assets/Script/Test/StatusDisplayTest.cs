@@ -30,7 +30,7 @@ public class StatusDisplayTest : SingletonMonoBehaviour<StatusDisplayTest>
             menuManager.Init();
 
 
-            menuManager.UpdateMenuStatus(unitManager.currentSelectUnit);
+            menuManager.UpdateCharacterMenuStatus(unitManager.currentSelectUnit);
 
         }
         catch (UnityException e)
