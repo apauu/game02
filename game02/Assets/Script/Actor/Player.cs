@@ -27,13 +27,19 @@ public class Player : AActor, IActor
             if (Physics.Raycast(ray, out hit, distance))
             {
                 // rayが当たったオブジェクトの名前を取得
-                GameObject unitObj = hit.collider.gameObject;
-                um.selectUnitTest(unitObj);
+                GameObject tileObj = hit.collider.gameObject;
+                Tile t = tileObj.GetComponent<Tile>();
+                Vector2 xy = t.location;
+
+                //選択位置にユニットがいればユニットを取得
+                Unit u = um.SelectUnitTest(xy);
 
                 //ユニットのメニューを表示
-                mm.commandOnOff(true);
+                //mm.commandOnOff(true);
 
-                Debug.Log(unitObj.name + " on click!");
+                if(u != null) Debug.Log(u.name + "(" + (int)xy.x + "," + (int)xy.y + ") on click!");
+                else Debug.Log("(" + (int)xy.x + "," + (int)xy.y + ") on click!");
+
             }
         }
     }

@@ -4,7 +4,13 @@ using System.Collections.Generic;
 /// <summary>
 /// ユニットの状態を保持するクラス。
 /// </summary>
-public class Unit : MonoBehaviour{
+public class Unit : MonoBehaviour
+{
+    /// <summary>
+    /// ゲーム上のX,Y座標（Unity座標上の値でない）
+    /// </summary>
+    public Vector2 location { get; set; }
+
     /// <summary>
     /// シーケンスNo
     /// </summary>
@@ -30,7 +36,7 @@ public class Unit : MonoBehaviour{
     /// </summary>
     public int ally { get; set; }
     /// <summary>
-    /// 
+    /// バフ
     /// </summary>
     public int buff { get; set; }
     /// <summary>
@@ -117,11 +123,6 @@ public class Unit : MonoBehaviour{
     /// 行動可不可 true:可能 false:不可能
     /// </summary>
     public bool active { get; set; }
-    /// <summary>
-    /// 位置
-    /// </summary>
-    public Vector3 position;
-
     /// <summary>
     /// バフ・デバフ
     /// </summary>

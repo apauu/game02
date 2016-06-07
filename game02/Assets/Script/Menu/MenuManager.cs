@@ -10,6 +10,19 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
 {
 
     #region フィールド変数
+    /// <summary>
+    /// メニュープレハブ.
+    /// </summary>
+    public GameObject menuCanvasPrefab;
+    /// <summary>
+    /// コマンドプレハブ.
+    /// </summary>
+    public GameObject characterCommandCanvasPrefab;
+    /// <summary>
+    /// 装備リストプレハブ.
+    /// </summary>
+    public GameObject characterEquipCanvasPrefab;
+
     //private propaties
 
     /// <summary>
@@ -82,21 +95,9 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
     /// </summary>
     private GameObject menu;
     /// <summary>
-    /// メニュープレハブ.
-    /// </summary>
-    public GameObject menuCanvasPrefab;
-    /// <summary>
     /// コマンドオブジェクト.
     /// </summary>
     private GameObject command;
-    /// <summary>
-    /// コマンドプレハブ.
-    /// </summary>
-    public GameObject characterCommandCanvasPrefab;
-    /// <summary>
-    /// 装備リストプレハブ.
-    /// </summary>
-    public GameObject characterEquipCanvasPrefab;
     #endregion
 
     // Use this for initialization

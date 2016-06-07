@@ -6,29 +6,49 @@
 public class Tile :MonoBehaviour{
 
     #region フィールド変数
-    //ID
+    /// <summary>
+    /// ID
+    /// </summary>
     public int tileID { get; set; }
-    //画像ファイル
+    /// <summary>
+    /// 画像ファイル
+    /// </summary>
     public string texture { get; set; }
-    //ゲーム上のX,Y座標（Unity座標上の値でない）
+    /// <summary>
+    /// ゲーム上のX,Y座標（Unity座標上の値でない）
+    /// </summary>
     public Vector2 location { get; set; }
-    //Unity上の3次元座標
+    /// <summary>
+    /// Unity上の3次元座標
+    /// </summary>
     public Vector3 realLocation
     {
         get { return transform.position; }
         set { transform.position = value; }
     }
-    //高さ。マイナス有り
+    /// <summary>
+    /// 高さ。マイナス有り
+    /// </summary>
     public int hight { get; set; }
-    //勢力情報
+    /// <summary>
+    /// 勢力情報
+    /// </summary>
     public int belongAlly { get; set; }
-    //true：拠点　false：その他
+    /// <summary>
+    /// true：拠点　false：その他
+    /// </summary>
     public bool isBase { get; set; }
-    //true：通行可　false：通行不可
+    /// <summary>
+    /// true：通行可　false：通行不可
+    /// </summary>
     public bool canEnter { get; set; }
-    //ユニットが通る際の追加移動力（沼地等）：０（平地）～－１０（進入不可）
+    /// <summary>
+    /// ユニットが通る際の追加移動力（沼地等）：０（平地）～－１０（進入不可）
+    /// </summary>
     public int movementForce { get; set; }
-    //ユニットが通る際の追加防御力（砦等）
+    /// <summary>
+    /// ユニットが通る際の追加防御力（砦等）
+    /// </summary>
     public int defensiveForce { get; set; }
     #endregion
 

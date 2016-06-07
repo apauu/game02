@@ -10,8 +10,10 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
     public Unit currentSelectUnit { get;  private set; }
     public Unit selectEnemyUnit { get; set; }
 
-    //マップ上の全ユニットリスト
-    List<Unit> unitList;
+    /// <summary>
+    /// マップ上の全ユニットリスト
+    /// </summary>
+    private List<Unit> unitList = new List<Unit>();
     //マップ上の全ユニットリスト
     //List<UnitController> uniconList = new List<UnitController>();
 
@@ -23,7 +25,9 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
         GenerateUnit(prefUnit);
         currentSelectUnit.ally = ally;
         PlaceUnit(unitObj, x , y);
-        unitObj.AddComponent<BoxCollider>();
+
+        //ユニット自体でクリック判定する場合必要
+        //unitObj.AddComponent<BoxCollider>();
 
         return unitObj;
 
@@ -36,16 +40,17 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
         //現在はユニットIDは使わずに素の状態のユニットを作成する
         //GameObject prefUnit = null;
         unitObj = (GameObject)Instantiate(prefUnit, new Vector3(0, 0, 0), Quaternion.identity);
-        unitObj.AddComponent<Unit>();
+        Unit u = unitObj.AddComponent<Unit>();
         //unitObj.AddComponent<UnitController>();
+        
         //Unitの初期化
         //TODO:ユニットIDを取得/設定する仕組みを作ること
-        currentSelectUnit = unitObj.GetComponent<Unit>();
+        currentSelectUnit = u;
         currentSelectUnit.InitUnit(GetSequenceNumber.SequenceNumber(sequenceCharacterNumber), "1");
 
-        //生成したユニットを配置する
-        //暫定的に位置[5,5]に配置する
-        //PlaceUnit(unitObj, 5, 5);
+
+        //ユニットリストに追加する
+        unitList.Add(u);
 
         return unitObj;
 
@@ -80,33 +85,57 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
     #endregion
 
     #region ユニット配置
-    //生成されたユニットを配置する
-    public bool PlaceUnit(GameObject unitObj, int x, int z)
+    /// <summary>
+    /// 生成されたユニットを配置する
+    /// </summary>
+    /// <param name="unitObj"></param>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <returns></returns>
+    public bool PlaceUnit(GameObject unitObj, int x, int y)
     {
 
         //配置場所のチェック
-        //MapController mapcon = new MapController(); //MapControllerはマネージャより取得する
+        MapController mc = MapController.Instance;
 
-        //if (mapcon.CanEnter(x,y)
-        //    || UnitManager.CheckPosition(gamePosition))
+        //機能していない
+        //if (!mc.CanEnter(x, y)
+        //    || !CanPlace(new Vector2(x, y)))
         //{
-        //    //その位置が進行不可でないことを確認する
-        //    //その位置にユニットがいないことを確認する
-        //    //位置が使えない場合エラーとなる
+        //    //その位置が進行不可能または
+        //    //その位置にユニットがいる場合
         //    return false;
         //}
 
         //移動先のタイル位置を取得する
-        MapController mapcon = MapController.Instance;
-        Vector3 rpos = mapcon.GetRealPosition(x, z);//タイルの中央位置
+        Vector3 rpos = mc.GetRealPosition(x, y);//タイルの中央位置
 
         //ユニットの実際の位置を設定する
         rpos.y = unitObj.transform.position.y;
         unitObj.transform.position = rpos;
 
         //ユニットのゲーム上の位置を設定する
-        currentSelectUnit.position = new Vector3((float)x, 0, (float)z);
+        Unit u = unitObj.GetComponent<Unit>();
+        u.location = new Vector2(x, y);
 
+        return true;
+    }
+
+    /// <summary>
+    /// 指定位置にユニットが存在するかチェックする
+    /// </summary>
+    /// <param name="xy"></param>
+    /// <returns></returns>
+    private bool CanPlace(Vector2 xy)
+    {
+        
+        foreach(Unit u in unitList)
+        {
+
+            //ユニットが配置されていたらfalse
+            if (u.location == xy) return false;
+
+        }
 
         return true;
     }
@@ -179,7 +208,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
                 || (ally == -1 && u.ally != myUnit.ally))
             {
                 //前のユニットより近い場合
-                int dist = (int)(Mathf.Abs(u.position.x - myUnit.position.x) + Mathf.Abs(u.position.y - myUnit.position.y));
+                int dist = (int)(Mathf.Abs(u.location.x - myUnit.location.x) + Mathf.Abs(u.location.y - myUnit.location.y));
                 if (nowDist > dist)
                 {
                     nowDist = dist;
@@ -190,16 +219,71 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>{
 
         return nearestUnit;
     }
+    #endregion
 
+    #region クリック用
     /// <summary>
     /// ユニット選択時のアクション。テスト用
     /// </summary>
-    public void selectUnitTest(GameObject unitObj)
+    public void SelectUnitTest(GameObject unitObj)
     {
-        UnitController unicon = unitObj.GetComponent<UnitController>();
-        Unit unit = unicon.GetIndividualUnit();
+        //コントローラをマネージャ格に格上げにつきコメントアウト
+        //UnitController unicon = unitObj.GetComponent<UnitController>();
+        //Unit unit = unicon.GetIndividualUnit();
+
+        Unit unit = unitObj.GetComponent<Unit>();
 
         currentSelectUnit = unit;
+        SetCurrentSelectUnit(unitObj);
+
+    }
+
+    /// <summary>
+    /// ユニット選択時のアクション。テスト用
+    /// 何もいない場合はnullを返す
+    /// </summary>
+    public Unit SelectUnitTest(Vector2 vec)
+    {
+
+        //位置情報からユニットを探す
+        Unit u = SearchUnit(vec);
+
+        if(u != null)
+        {
+            //ユニットがいれば選択する
+            currentSelectUnit = u;
+
+            //オブサーバー通知。おそらく未使用。いらない？
+            SetCurrentSelectUnit(u.gameObject);
+
+            //メニューの表示を更新
+            MenuManager mm = MenuManager.Instance;
+            mm.UpdateCharacterMenuStatus(u);
+        }
+
+        return u;
+
+    }
+
+    /// <summary>
+    /// 位置情報からユニットを探す
+    /// 何もいない場合はnullを返す
+    /// </summary>
+    private Unit SearchUnit(Vector2 vec)
+    {
+
+        foreach(Unit u in unitList)
+        {
+            if(u.location == vec)
+            {
+                //指定位置にユニットがいれば返す
+                return u;
+
+            }
+        }
+
+        return null;
+
     }
 
     /// <summary>

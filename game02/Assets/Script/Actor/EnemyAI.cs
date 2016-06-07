@@ -19,7 +19,7 @@ public class EnemyAI : AActor,IActor {
         {
             //ユニットから一番近いユニットの位置を取得
             Unit nearestEnemy = um.getNearestEnemy(u);
-            Vector3 v = nearestEnemy.position;
+            Vector2 v = nearestEnemy.location;
 
             ////ユニットを指定位置の近くまで移動させる
             //uc.Move(u, v);

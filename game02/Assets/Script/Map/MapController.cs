@@ -159,20 +159,24 @@ public class MapController : SingletonMonoBehaviour<MapController>
         //【tileIDArray内容未使用】
         List<List<GameObject>> tiles = new List<List<GameObject>>();
 
-            for (int x = 0; x < tileIDArray.Length; x++)
+        for (int x = 0; x < tileIDArray.Length; x++)
         {
             tiles.Add(new List<GameObject>());
             for (int y = 0; y < tileIDArray[0].Length; y++)
             {
-                GameObject obj = Instantiate(prefPlaneTile, new Vector3(x,MapConst.BaseY,y), Quaternion.identity) as GameObject;
+                //タイルオブジェクトを生成
+                GameObject tileObj = Instantiate(prefPlaneTile, new Vector3(x,MapConst.BaseY,y), Quaternion.identity) as GameObject;
+                tileObj.transform.parent = myMap.transform;
+
                 //タイル毎に個別の値（位置情報等）を持たせたい場合はここで設定する
-                Tile t = obj.GetComponent<Tile>();
-                obj.transform.parent = myMap.transform;
-                tiles[x].Add(obj);
+                Tile t = tileObj.GetComponent<Tile>();
+                tiles[x].Add(tileObj);
+                t.realLocation = tileObj.transform.position;
+                t.location = new Vector2(x, y);
 
                 //タイルクリック用にコリダーとコールバック関数を設定
-                obj.AddComponent<BoxCollider>();
-                t.callbackOnMouseDown = onClickUnit;
+                tileObj.AddComponent<BoxCollider>();
+                //t.callbackOnMouseDown = onClickUnit;
 
             }
         }

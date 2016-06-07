@@ -213,20 +213,20 @@ public class UnitController : UnitManager
     /// </summary>
     /// <param name="myUnit">行動するユニット</param>
     /// <param name="position">移動先</param>
-    public void Move(Unit myUnit, Vector3 position)
+    public void Move(Unit myUnit, Vector2 location)
     {
         //移動力取得
         int mobi = myUnit.currentMobility;
-        Vector3 nowPos = myUnit.position;
+        Vector2 nowLoc = myUnit.location;
 
         while(mobi > 0)
         {
             //移動力がなくなるまで縦と横を交互に移動
-            Vector3 nextPos = position;
+            Vector2 nextLoc = location;
             //ユニットが次の移動先に侵入可能か判定
             //if ()
             //ユニットを移動させる
-            myUnit.position = nextPos;
+            myUnit.location = nextLoc;
 
             mobi--;
         }
@@ -277,9 +277,9 @@ public class UnitController : UnitManager
 
         //攻撃範囲の中に敵ユニットがいるかチェック
         //いる場合true
-        foreach (Vector3 v in atkArea)
+        foreach (Vector2 loc in atkArea)
         {
-            if (targetUnit.position.Equals(v))
+            if (targetUnit.location.Equals(loc))
             {
                 return true;
             }
@@ -312,19 +312,19 @@ public class UnitController : UnitManager
         }
 
         //自身を起点としたエリアをリストにして返す
-        Vector3 v = myUnit.position;
+        Vector2 v = myUnit.location;
 
         for(int x = 0; x > range; x++)
         {
             for (int y = 0; y > range; y++)
             {
-                v = new Vector3(myUnit.position.x + (float)x, myUnit.position.y + (float)y);
+                v = new Vector3(myUnit.location.x + (float)x, myUnit.location.y + (float)y);
                 skillArea.Add(v);
-                v = new Vector3(myUnit.position.x - (float)x, myUnit.position.y + (float)y);
+                v = new Vector3(myUnit.location.x - (float)x, myUnit.location.y + (float)y);
                 skillArea.Add(v);
-                v = new Vector3(myUnit.position.x + (float)x, myUnit.position.y - (float)y);
+                v = new Vector3(myUnit.location.x + (float)x, myUnit.location.y - (float)y);
                 skillArea.Add(v);
-                v = new Vector3(myUnit.position.x - (float)x, myUnit.position.y - (float)y);
+                v = new Vector3(myUnit.location.x - (float)x, myUnit.location.y - (float)y);
                 skillArea.Add(v);
             }
         }
@@ -360,7 +360,7 @@ public class UnitController : UnitManager
     }
     #endregion
 
-    #region　ユニットクリック時デリゲート
+    #region　ユニットクリック時デリゲート ユニット自体にクリックイベントを付ける場合使う
     /// <summary>
     /// デリゲート用
     /// </summary>
