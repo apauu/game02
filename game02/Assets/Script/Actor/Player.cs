@@ -50,17 +50,17 @@ public class Player : AActor, IActor
 
                     switch (command)
                     {
-                        case "MOVE":
+                        case MenuManager.CommandMove:
                             //移動コマンド選択中の場合の動作
                             DoMoveCommand(hitObj);
                             break;
 
-                        case "ATTACK":
+                        case MenuManager.CommandAttack:
                             //攻撃コマンド選択中の場合の動作
                             DoAttackCommand(hitObj);
                             break;
 
-                        case "SKILL":
+                        case MenuManager.CommandSkill:
                             //スキルコマンド選択中の場合の動作
                             DoAttackCommand(hitObj);
                             break;
@@ -104,12 +104,12 @@ public class Player : AActor, IActor
         //クリック位置のユニットを取得
         Tile t = hitObj.GetComponent<Tile>();
         Vector2 xy = t.location;
-        Unit u = um.SelectUnitTest(xy);
+        Unit u = um.SearchUnit(xy);
         
         //ユニットがいない場合、選択中ユニットをクリック位置へ移動
         if(u == null)
         {
-            um.MoveCurrentUnit(xy);
+            if(um.MoveCurrentUnit(xy)) command = null;
         }
 
 
@@ -127,12 +127,13 @@ public class Player : AActor, IActor
         //クリック位置のユニットを取得
         Tile t = hitObj.GetComponent<Tile>();
         Vector2 xy = t.location;
-        Unit u = um.SelectUnitTest(xy);
+        Unit u = um.SearchUnit(xy);
 
         //選択位置に敵対ユニットがいる場合
         if (u != null && u.ally != this.ally)
         {
-            um.Attack(u, skillNo);
+            if(um.Attack(u, skillNo)) command = null;
+
         }
 
     }

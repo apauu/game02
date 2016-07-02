@@ -203,17 +203,20 @@ public partial class UnitManager
     /// 選択中のユニットが移動できれば、指定位置に移動させる
     /// </summary>
     /// <param name="position">移動先</param>
-    public void MoveCurrentUnit(Vector2 location)
+    /// <returns></returns>
+    public bool MoveCurrentUnit(Vector2 location)
     {
         //移動力取得
         int mobi = currentSelectUnit.currentMobility;
         Vector2 nowLoc = currentSelectUnit.location;
 
-        if(this.CanMoveToLocation(mobi, location, nowLoc))
+        if(this.CanMoveToLocation(mobi, nowLoc, location))
         {
-            PlaceUnit(unitObj,(int)location.x, (int)location.y);
+            return PlaceUnit(unitObj,(int)location.x, (int)location.y);
 
         }
+
+        return false;
     }
 
     /// <summary>
@@ -230,7 +233,7 @@ public partial class UnitManager
 
         int distance = Math.Abs(horizon) + Math.Abs(vertical);
 
-        return distance > mobility;
+        return distance < mobility;
     }
     #endregion
 
@@ -249,6 +252,9 @@ public partial class UnitManager
         //攻撃が届く場合攻撃
         if (ReachAttack(targetUnit, skillNo))
         {
+            this.selectEnemyUnit = targetUnit;
+
+            PreBattle(currentSelectUnit, selectEnemyUnit);
 
             return true;
 

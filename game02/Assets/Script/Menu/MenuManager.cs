@@ -119,6 +119,21 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
     /// </summary>
     private GameObject flavorTextObject;
 
+    /// <summary>
+    /// 移動コマンド
+    /// </summary>
+    public const string CommandMove = "MOVE";
+
+    /// <summary>
+    /// 攻撃コマンド
+    /// </summary>
+    public const string CommandAttack = "ATTACK";
+
+    /// <summary>
+    /// スキルコマンド
+    /// </summary>
+    public const string CommandSkill = "SKILL";
+
     #endregion
 
     // Use this for initialization
@@ -308,17 +323,19 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
         {
             //移動処理
             case GameObjectNameConst.MoveButton:
+                gameManager.SelectPlayerCommand(CommandMove);
                 Debug.Log(processName);
-                //gameManager.characterMove();
                 break;
             //攻撃処理
             case GameObjectNameConst.AttackButton:
                 //選択したコマンド（物理攻撃）をセット
+                gameManager.SelectPlayerCommand(CommandAttack);
                 unitManager.currentSelectAttackKind = SkillConst.SkillKindIsPhysicalAttack;
                 Debug.Log(processName);
                 break;
             //妖術処理
             case GameObjectNameConst.SkillButton:
+                gameManager.SelectPlayerCommand(CommandSkill);
                 Debug.Log(processName);
                 break;
             //装備処理

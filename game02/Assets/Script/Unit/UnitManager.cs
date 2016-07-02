@@ -269,7 +269,7 @@ public partial class UnitManager : SingletonMonoBehaviour<UnitManager>{
     /// 位置情報からユニットを探す
     /// 何もいない場合はnullを返す
     /// </summary>
-    private Unit SearchUnit(Vector2 vec)
+    public Unit SearchUnit(Vector2 vec)
     {
 
         foreach(Unit u in unitList)

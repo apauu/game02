@@ -194,7 +194,7 @@ public class Unit : MonoBehaviour
         buff = 0;
         lvl = 1;
         exp = 1;
-        baseMobility = 1;
+        baseMobility = 5;
         currentMobility = baseMobility;
         baseHp = 1;
         baseChangeHp = 100;
