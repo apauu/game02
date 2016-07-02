@@ -52,7 +52,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             GameObject camera = GameObject.Find("Main Camera"); ;
             CameraControl camecon = camera.AddComponent<CameraControl>();
             //ユニットマネージャーにオブサーバー追加
-            unitManager.AddObserver(camecon);
+            //unitManager.AddObserver(camecon);
+            mapCon.AddObserver(camecon);
 
             //メニュー生成
             menuManager.GenerateMenu();
@@ -216,5 +217,14 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         //menuManager.UpdateEnemyMenuStatus();
         //menu.transform.FindChild("Child").gameObject;
+    }
+
+    /// <summary>
+    /// メニューより呼び出され、選択したコマンドをプレイヤーに伝える
+    /// </summary>
+    /// <param name="command"></param>
+    public void SelectPlayerCommand(string command)
+    {
+        player.command = command;
     }
 }

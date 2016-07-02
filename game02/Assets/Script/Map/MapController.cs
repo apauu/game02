@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 
 /// <summary>
 /// Map,Tileクラスを生成・管理するクラス
@@ -10,6 +11,7 @@ public class MapController : SingletonMonoBehaviour<MapController>
 {
 
     GameObject myMap;
+    private GameObject ActiveObj;
     //Dictionary<int, Map> mapList;
     public GameObject prefMap { get; set; }
     public GameObject prefPlaneTile { get; set; }
@@ -185,5 +187,44 @@ public class MapController : SingletonMonoBehaviour<MapController>
     }
     #endregion
 
+    #endregion
+
+    #region observer用
+
+    /// <summary>
+    /// 選択中のタイルを変更する
+    /// オブサーバー通知あり
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <returns></returns>
+    public Tile SelectTile(GameObject tileObj)
+    {
+        this.ActiveObj = tileObj;
+        NotifyObservers(this.ActiveObj);
+
+        return this.ActiveObj.GetComponent<Tile>();
+    }
+
+    private ArrayList observers = new ArrayList();
+
+    // Observerを追加します。
+    public void AddObserver(IObserver observer)
+    {
+        observers.Add(observer);
+    }
+
+    // Observerを削除します。
+    public void DeleteObserver(IObserver observer)
+    {
+        observers.Remove(observer);
+    }
+    /// <summary>
+    /// Observerへ通知します。
+    /// </summary>
+    public void NotifyObservers(GameObject obj)
+    {
+        foreach (IObserver observer in observers)
+            observer.Update(obj);
+    }
     #endregion
 }

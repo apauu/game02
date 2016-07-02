@@ -321,7 +321,7 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
     public void CharacterEquipFacade(string processName)
     {
         //現在選択中のユニット(仮)
-        UnitController myUnit = new UnitController();
+        //UnitController myUnit = new UnitController();
         //選択した装備ID
         string weaponID;
 
@@ -331,19 +331,19 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
             case "equipButton1":
                 Debug.Log(processName);
                 weaponID = EquipConst.WeaponID1;
-                myUnit.ChangeWeapon(weaponID);
+                //myUnit.ChangeWeapon(weaponID);
                 break;
             //装備２処理
             case "equipButton2":
                 Debug.Log(processName);
                 weaponID = EquipConst.WeaponID2;
-                myUnit.ChangeWeapon(weaponID);
+                //myUnit.ChangeWeapon(weaponID);
                 break;
             //装備３処理
             case "equipButton3":
                 Debug.Log(processName);
                 weaponID = EquipConst.WeaponID3;
-                myUnit.ChangeWeapon(weaponID);
+                //myUnit.ChangeWeapon(weaponID);
                 break;
             default:
                 Debug.Log(processName);

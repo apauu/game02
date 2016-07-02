@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class UnitManager : SingletonMonoBehaviour<UnitManager>{
+public partial class UnitManager : SingletonMonoBehaviour<UnitManager>{
 
     private  int sequenceCharacterNumber = 0;
     private GameObject unitObj;

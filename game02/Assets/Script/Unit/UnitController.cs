@@ -1,27 +1,18 @@
 ﻿using UnityEngine;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 
 /// <summary>
 /// 個別のユニットを管理するクラス
 /// </summary>
-public class UnitController : UnitManager
+public partial class UnitManager
 {
 
     /// <summary>
     /// ユニットクラス
     /// </summary>
     private Unit individualUnit;
-
-    // Use this for initialization
-    void Start () {
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
-    }
 
     ///// <summary>
     ///// コンストラクタ
@@ -209,48 +200,90 @@ public class UnitController : UnitManager
 
     #region 移動
     /// <summary>
-    /// ユニットを指定位置に移動させる。未実装
+    /// 選択中のユニットが移動できれば、指定位置に移動させる
     /// </summary>
-    /// <param name="myUnit">行動するユニット</param>
     /// <param name="position">移動先</param>
-    public void Move(Unit myUnit, Vector2 location)
+    public void MoveCurrentUnit(Vector2 location)
     {
         //移動力取得
-        int mobi = myUnit.currentMobility;
-        Vector2 nowLoc = myUnit.location;
+        int mobi = currentSelectUnit.currentMobility;
+        Vector2 nowLoc = currentSelectUnit.location;
 
-        while(mobi > 0)
+        if(this.CanMoveToLocation(mobi, location, nowLoc))
         {
-            //移動力がなくなるまで縦と横を交互に移動
-            Vector2 nextLoc = location;
-            //ユニットが次の移動先に侵入可能か判定
-            //if ()
-            //ユニットを移動させる
-            myUnit.location = nextLoc;
+            PlaceUnit(unitObj,(int)location.x, (int)location.y);
 
-            mobi--;
         }
+    }
+
+    /// <summary>
+    /// 現在位置から指定位置まで移動可能ならtrue
+    /// </summary>
+    /// <param name="mobility"></param>
+    /// <param name="from"></param>
+    /// <param name="to"></param>
+    /// <returns></returns>
+    private bool CanMoveToLocation(int mobility, Vector2 from, Vector2 to)
+    {
+        int horizon = (int)(to.x - from.x);
+        int vertical = (int)(to.y - from.y);
+
+        int distance = Math.Abs(horizon) + Math.Abs(vertical);
+
+        return distance > mobility;
     }
     #endregion
 
     #region ユニット対象行動
 
-    public bool CanTargetSupport(Unit myUnit, Unit targetUnit)
+    #region 攻撃
+    /// <summary>
+    /// 選択中のユニットに攻撃行動をさせる
+    /// </summary>
+    /// <param name="targetUnit">相手ユニット</param>
+    /// <param name="skillNo">行動ユニットのスキル番号</param>
+    /// <return>結果</return>
+    public bool Attack(Unit targetUnit, int skillNo)
     {
-        return CanTarget(myUnit, targetUnit, false);
+
+        //攻撃が届く場合攻撃
+        if (ReachAttack(targetUnit, skillNo))
+        {
+
+            return true;
+
+        }
+
+        return false;
     }
 
-    public bool CanTargetAttack(Unit myUnit, Unit targetUnit)
+    /// <summary>
+    /// サポートスキルが届くかどうか
+    /// </summary>
+    /// <param name="targetUnit"></param>
+    /// <returns></returns>
+    public bool ReachSupport(Unit targetUnit, int skillNo)
     {
-        return CanTarget(myUnit, targetUnit, true);
+        return CanTarget(currentSelectUnit, targetUnit, skillNo, false);
+    }
+
+    /// <summary>
+    /// 攻撃スキルが届くかどうか
+    /// </summary>
+    /// <param name="targetUnit"></param>
+    /// <returns></returns>
+    public bool ReachAttack(Unit targetUnit, int skillNo)
+    {
+        return CanTarget(currentSelectUnit, targetUnit, skillNo, true);
     }
     /// <summary>
     /// 行動範囲に対象がいるかチェック
     /// </summary>
     /// <param name="myUnit">行動するユニット</param>
     /// <param name="targetUnit">相手ユニット</param>
+    /// <param name="skillNo">使用スキル</param>
     /// <param name="attack">行動が攻撃ならtrue、補助ならfalse</param>
-    public bool CanTarget(Unit myUnit, Unit targetUnit, bool attack)
+    private bool CanTarget(Unit myUnit, Unit targetUnit, int skillNo, bool attack)
     {
         //行動可能なユニットかチェック
         if (!myUnit.active)
@@ -269,7 +302,7 @@ public class UnitController : UnitManager
         }
 
         //行動範囲を取得
-        List<Vector3> atkArea = GetSkillArea(myUnit, attack);
+        List<Vector3> atkArea = GetSkillArea(myUnit, skillNo);
         if (atkArea.Count == 0)
         {
             return false;
@@ -287,23 +320,20 @@ public class UnitController : UnitManager
 
         return false;
     }
+    #endregion
 
     /// <summary>
     /// 行動範囲を取得
     /// </summary>
     /// <param name="myUnit">行動するユニット</param>
-    /// <param name="attack">行動が攻撃ならtrue、補助ならfalse</param>
-    public List<Vector3> GetSkillArea(Unit myUnit, bool attack)
+    /// <param name="skillNo">使用スキル</param>
+    private List<Vector3> GetSkillArea(Unit myUnit, int skillNo)
     {
         HashSet<Vector3> skillArea = new HashSet<Vector3>();
 
-        //対象となるすべてのスキルを取得する
-        //foreach(Skill skill in myUnit.skills)
-        //{
-
-        //}
-        Skill skill = new Skill();
-        int range = 1;
+        //使用するスキルを取得
+        Skill skill = currentSelectUnit.skills[skillNo];
+        int range = skill.range;
 
         //範囲攻撃なら範囲攻撃の射程を足す
         if (skill.area)
@@ -330,18 +360,6 @@ public class UnitController : UnitManager
         }
 
         return skillArea.ToList();
-    }
-
-    /// <summary>
-    /// 攻撃行動をする
-    /// </summary>
-    /// <param name="myUnit">行動するユニット</param>
-    /// <param name="targetUnit">相手ユニット</param>
-    /// <param name="skillNo">行動ユニットのスキル番号</param>
-    public bool Attack(Unit myUnit, Unit targetUnit, int skillNo)
-    {
-
-        return true;
     }
     
     /// 攻撃・デバフのダメージ、命中率を計算する

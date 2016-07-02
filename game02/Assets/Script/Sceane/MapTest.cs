@@ -50,8 +50,8 @@ public class MapTest : MonoBehaviour {
         um.AddObserver(camecon);
 
         //味方ゴブリンにクリック動作を設定
-        UnitController unicon = mikata.GetComponent<UnitController>();
-        unicon.callbackOnMouseDown = onClickUnit;
+        //UnitController unicon = mikata.GetComponent<UnitController>();
+        //unicon.callbackOnMouseDown = onClickUnit;
 
         // レイヤーを作成
         MapLayer ml = this.gameObject.AddComponent<MapLayer>();
