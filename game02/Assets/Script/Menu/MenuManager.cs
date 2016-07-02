@@ -13,17 +13,22 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
     /// <summary>
     /// メニュープレハブ.
     /// </summary>
-    public GameObject menuCanvasPrefab;
+    private GameObject menuCanvasPrefab;
     /// <summary>
     /// コマンドプレハブ.
     /// </summary>
-    public GameObject characterCommandCanvasPrefab;
+    private GameObject characterCommandCanvasPrefab;
     /// <summary>
     /// 装備リストプレハブ.
     /// </summary>
-    public GameObject characterEquipCanvasPrefab;
+    private GameObject characterEquipCanvasPrefab;
 
     //private propaties
+
+    /// <summary>
+    /// ユニットマネージャー.
+    /// </summary>
+    private GameManager gameManager;
 
     /// <summary>
     /// ユニットマネージャー.
@@ -89,6 +94,11 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
     /// エネミー経験値スライダー（UI）.
     /// </summary>
     private Slider enemyExperienceSlider;
+    
+    /// <summary>
+    /// フレーバーテキスト（UI）.
+    /// </summary>
+    private Text flavorText;
 
     /// <summary>
     /// メニューオブジェクト.
@@ -98,11 +108,23 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
     /// コマンドオブジェクト.
     /// </summary>
     private GameObject command;
+
+    /// <summary>
+    /// ステータスオブジェクト.
+    /// </summary>
+    private GameObject statusObject;
+
+    /// <summary>
+    /// フレーバーテキストオブジェクト.
+    /// </summary>
+    private GameObject flavorTextObject;
+
     #endregion
 
     // Use this for initialization
     void Start () {
         unitManager = UnitManager.Instance;
+        gameManager = GameManager.Instance;
     }
     // Update is called once per frame
     void Update () {    
@@ -113,6 +135,13 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
     /// </summary>
     public void Init ()
     {
+
+        //フレーバーテキストオブジェクトを紐づけ
+        flavorTextObject = GameObject.Find(GameObjectNameConst.FlavorTextObject);
+        //フレーバーテキストを紐づけ
+        flavorText = GameObject.Find(GameObjectNameConst.FlavorText).GetComponent<Text>();
+        //ステータスオブジェクトを紐づけ
+        statusObject = GameObject.Find(GameObjectNameConst.StatusObject);
         /* キャラクターオブジェクトの検索 */
         //キャラクター名オブジェクトを紐づけ
         characterNameText = GameObject.Find(GameObjectNameConst.CharacterNameText).GetComponent<Text>();
@@ -136,6 +165,9 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
         //エネミー経験値オブジェクトを紐づけ
         enemyExperienceText = GameObject.Find(GameObjectNameConst.EnemyExperienceText).GetComponent<Text>();
         enemyExperienceSlider = GameObject.Find(GameObjectNameConst.EnemyExperienceSlider).GetComponent<Slider>();
+
+        statusObject.SetActive(true);
+        flavorTextObject.SetActive(false);
     }
 
     /// <summary>
@@ -270,27 +302,36 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
     /// <param name="processName"></param>
     public void CharacterCommandFacade(string processName)
     {
+        //初期化処理 開いているメニューを閉じるなど
+        //InitCommandPut();
         switch (processName)
         {
             //移動処理
-            case "moveButton":
+            case GameObjectNameConst.MoveButton:
                 Debug.Log(processName);
                 //gameManager.characterMove();
                 break;
             //攻撃処理
-            case "attackButton":
+            case GameObjectNameConst.AttackButton:
                 //選択したコマンド（物理攻撃）をセット
                 unitManager.currentSelectAttackKind = SkillConst.SkillKindIsPhysicalAttack;
                 Debug.Log(processName);
                 break;
             //妖術処理
-            case "skillButton":
+            case GameObjectNameConst.SkillButton:
                 Debug.Log(processName);
                 break;
             //装備処理
-            case "equipButton":
+            case GameObjectNameConst.EquipButton:
                 Debug.Log(processName);
-                showEquipList();
+                ShowEquipList();
+                break;
+            //感情処理
+            case GameObjectNameConst.EmotionButton:
+                statusObject.SetActive(false);
+                flavorTextObject.SetActive(true);
+                SetFlavorText();
+                Debug.Log(processName);
                 break;
             default:
                 Debug.Log(processName);
@@ -301,9 +342,27 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
     }
 
     /// <summary>
+    /// コマンド押下時の初期化処理
+    /// コマンド押下によって展開されたメニューを閉じる
+    /// </summary>
+    private void InitCommandPut()
+    {
+        //characterEquipCanvasPrefab.SetActive(false);
+    }
+
+    /// <summary>
+    /// フレーバーテキストを設定する
+    /// TODO:実際のテキストを取得してくる仕組みが必要
+    /// </summary>
+    private void SetFlavorText()
+    {
+        flavorText.text = "flavor text";
+    }
+
+    /// <summary>
     /// 装備選択画面を表示する
     /// </summary>
-    private void showEquipList()
+    private void ShowEquipList()
     {
         //プレハブ作成
         //装備リスト表示用

@@ -31,9 +31,20 @@ public static class GameObjectNameConst
     /// </summary>
     public const string PlaneTilePrefab = "Tile";
 
+    /// <summary>
+    /// フレーバーテキスト表示部のオブジェクト名称.
+    /// </summary>
+    public const string FlavorTextObject = "flavorTextObject";
+    /// <summary>
+    /// フレーバーテキスト表示部のテキストオブジェクト名称.
+    /// </summary>
+    public const string FlavorText = "flavorText";
+    /// <summary>
+    /// ステータス表示部のオブジェクト名称.
+    /// </summary>
+    public const string StatusObject = "statusObject";
 
-
-    /*現在選択されているキャラクター（敵味方両方）用のUIオブジェクト*/
+    /*現在選択されているキャラクター用のUIオブジェクト*/
     /// <summary>
     /// 現在選択されているキャラクター用オブジェクト名称.
     /// キャラクター名など複数のオブジェクトを内包するオブジェクト
@@ -66,7 +77,7 @@ public static class GameObjectNameConst
 
 
 
-    /*現在選択されているキャラクター（敵味方両方）用のUIオブジェクト*/
+    /*現在選択されているキャラクター用のUIオブジェクト*/
     /// <summary>
     /// 現在選択されているキャラクター用オブジェクト名称.
     /// エネミー名など複数のオブジェクトを内包するオブジェクト
@@ -96,5 +107,27 @@ public static class GameObjectNameConst
     /// エネミー名経験値スライダーオブジェクト名称.
     /// </summary>
     public const string EnemyExperienceSlider = "enemyExpSlider";
+
+    /*コマンドのUIオブジェクト名称*/
+    /// <summary>
+    /// 移動オブジェクト名称.
+    /// </summary>
+    public const string MoveButton = "moveButton";
+    /// <summary>
+    /// 攻撃オブジェクト名称.
+    /// </summary>
+    public const string AttackButton = "attackButton";
+    /// <summary>
+    /// 技オブジェクト名称.
+    /// </summary>
+    public const string SkillButton = "skillButton";
+    /// <summary>
+    /// 装備オブジェクト名称.
+    /// </summary>
+    public const string EquipButton = "equipButton";
+    /// <summary>
+    /// 感情オブジェクト名称.
+    /// </summary>
+    public const string EmotionButton = "emotionButton";
 
 }
