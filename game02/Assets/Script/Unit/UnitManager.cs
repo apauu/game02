@@ -59,13 +59,27 @@ public partial class UnitManager : SingletonMonoBehaviour<UnitManager>{
     //テスト用ユニット生成メソッド
     public void GenerateUnitsTest(AActor actor)
     {
-        //テスト用ゴブリン生成
-        //UnitGenerator ug = new UnitGenerator();  //MonoBehaviourはnewで作成できない
-        UnitGenerator ug = this.gameObject.AddComponent<UnitGenerator>();
-        GameObject goblinPref = ug.getTestUnitPrefab(UnitConst.UnitID1);
-        GameObject unitObj = GenerateUnit(goblinPref, actor.ally, 5, 5);
-        //UnitController unicon = unitObj.GetComponent<UnitController>();
-        //uniconList.Add(unicon);
+        if(actor is Player)
+        {
+            //テスト用ゴブリン生成
+            //UnitGenerator ug = new UnitGenerator();  //MonoBehaviourはnewで作成できない
+            UnitGenerator ug = this.gameObject.AddComponent<UnitGenerator>();
+            GameObject goblinPref = ug.getTestUnitPrefab(UnitConst.UnitID1);
+            GameObject unitObj = GenerateUnit(goblinPref, actor.ally, 5, 5);
+            //UnitController unicon = unitObj.GetComponent<UnitController>();
+            //uniconList.Add(unicon);
+
+        }
+        else if(actor is EnemyAI)
+        {
+            UnitGenerator ug = this.gameObject.AddComponent<UnitGenerator>();
+            GameObject goblinPref = ug.getTestUnitPrefab(UnitConst.UnitID1);
+            GameObject unitObj = GenerateUnit(goblinPref, actor.ally, 5, 6);
+        }
+        else
+        {
+            Debug.Log("unknown actor");
+        }
 
     }
 

@@ -73,6 +73,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
             //キャラクター生成テスト
             unitManager.GenerateUnitsTest(player);
+            unitManager.GenerateUnitsTest(enemy);
 
             //ユニットの初期配置（ユーザ操作前）を設定する
             //↓生成時に配置できれば不要？
