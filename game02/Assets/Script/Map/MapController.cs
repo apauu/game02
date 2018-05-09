@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using GameLibrary;
 
 /// <summary>
 /// Map,Tileクラスを生成・管理するクラス
@@ -174,7 +175,7 @@ public class MapController : SingletonMonoBehaviour<MapController>
                 Tile t = tileObj.GetComponent<Tile>();
                 tiles[x].Add(tileObj);
                 t.realLocation = tileObj.transform.position;
-                t.location = new Vector2(x, y);
+                t.Entity.location = new Point(x, y);
 
                 //タイルクリック用にコリダーとコールバック関数を設定
                 tileObj.AddComponent<BoxCollider>();

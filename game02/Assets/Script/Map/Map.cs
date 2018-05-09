@@ -20,7 +20,7 @@ public class Map : MonoBehaviour
     /// </summary>
     public bool CanEnter(int x, int y)
     {
-        return tiles[x][y].GetComponent<Tile>().canEnter;
+        return tiles[x][y].GetComponent<Tile>().Entity.canEnter;
     }
 
     /// <summary>

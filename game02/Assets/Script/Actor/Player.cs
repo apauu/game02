@@ -103,7 +103,7 @@ public class Player : AActor, IActor
     {
         //クリック位置のユニットを取得
         Tile t = hitObj.GetComponent<Tile>();
-        Vector2 xy = t.location;
+        Vector2 xy = t.Entity.location.ToVector2();
         Unit u = um.SearchUnit(xy);
         
         //ユニットがいない場合、選択中ユニットをクリック位置へ移動
@@ -126,7 +126,7 @@ public class Player : AActor, IActor
 
         //クリック位置のユニットを取得
         Tile t = hitObj.GetComponent<Tile>();
-        Vector2 xy = t.location;
+        Vector2 xy = t.Entity.location.ToVector2();
         Unit u = um.SearchUnit(xy);
 
         //選択位置に敵対ユニットがいる場合
@@ -158,7 +158,7 @@ public class Player : AActor, IActor
 
         //選択位置にユニットがいればユニットを取得
         Tile t = hitObj.GetComponent<Tile>();
-        Vector2 xy = t.location;
+        Vector2 xy = t.Entity.location.ToVector2();
         Unit u = um.SelectUnitTest(xy);
 
         //ユニットのメニューを表示
